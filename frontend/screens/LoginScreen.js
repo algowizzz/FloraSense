@@ -18,15 +18,17 @@ export default function LoginScreen({ navigation }) {
     <View style={styles.container}>
       <Text style={styles.title}>Login</Text>
       <Text style={styles.subtitle}>
-        It’s time to return to the soil! Log in to your account and keep growing.
-        🌱
+        It’s time to return to the soil! Log in to your account and keep growing. 🌱
       </Text>
 
       {/* Email Input */}
       <View style={styles.inputContainer}>
         <TextInput placeholder="Email" style={styles.input} />
-        <Ionicons name="mail-outline" size={20} color="#555" style={styles.icon} />
+        <View style={styles.iconWrapper}>
+          <Ionicons name="mail-outline" size={30} color="#555" />
+        </View>
       </View>
+
 
       {/* Password Input */}
       <View style={styles.inputContainer}>
@@ -36,16 +38,17 @@ export default function LoginScreen({ navigation }) {
           secureTextEntry={!showPassword}
         />
         <TouchableOpacity
-          style={styles.icon}
+          style={styles.iconWrapper}
           onPress={() => setShowPassword(!showPassword)}
         >
           <Ionicons
             name={showPassword ? "eye-off-outline" : "eye-outline"}
-            size={20}
+            size={30}
             color="#555"
           />
         </TouchableOpacity>
       </View>
+
 
       {/* Remember Me & Forgot Password */}
       <View style={styles.options}>
@@ -53,12 +56,12 @@ export default function LoginScreen({ navigation }) {
           <Switch
             value={rememberMe}
             onValueChange={setRememberMe}
-            thumbColor={rememberMe ? "#2d6a4f" : "#ccc"}
+            thumbColor={rememberMe ? "#2d6a4f" : "#000000ff"}
           />
           <Text style={styles.rememberText}> Remember Me</Text>
         </View>
         <TouchableOpacity>
-          <Text style={styles.link}>Forgot Password</Text>
+          <Text style={styles.link}>Forgot Password?</Text>
         </TouchableOpacity>
       </View>
 
@@ -102,16 +105,19 @@ const styles = StyleSheet.create({
     backgroundColor: "#eef2e6",
     alignItems: "center",
     justifyContent: "center",
-    padding: 20,
+    padding: 40,
   },
   title: {
-    fontSize: 28,
+    fontSize: 40,
+    fontFamily: 'AvenirNext-Bold',
     fontWeight: "bold",
     color: "#2d4a22",
-    marginBottom: 8,
+    marginBottom: 20,
+    marginRight: 'auto',
   },
   subtitle: {
-    fontSize: 14,
+    fontFamily: 'AvenirNext-Regular',
+    fontSize: 15,
     color: "#555",
     textAlign: "center",
     marginBottom: 25,
@@ -129,10 +135,24 @@ const styles = StyleSheet.create({
   },
   input: {
     flex: 1,
-    fontSize: 14,
+    fontSize: 15,
+    fontFamily: 'AvenirNext-Regular',
   },
   icon: {
     marginLeft: 10,
+  },
+  iconWrapper: {
+  width: 50,
+  height: 50,
+  borderRadius: 50,
+  backgroundColor: "#fff",
+  justifyContent: "center",
+  alignItems: "center",
+  shadowColor: "#000",
+  shadowOffset: { width: 0, height: 2 },
+  shadowOpacity: 0.1,
+  shadowRadius: 3,
+  elevation: 2,
   },
   options: {
     width: "100%",
@@ -144,29 +164,34 @@ const styles = StyleSheet.create({
   rememberText: {
     fontSize: 14,
     color: "#444",
+    fontFamily: 'AvenirNext-Regular',
   },
   link: {
     fontSize: 14,
     color: "#2d6a4f",
     fontWeight: "500",
+    fontFamily: 'AvenirNext-Regular',
   },
   loginBtn: {
+    marginTop: 15,
     width: "100%",
     backgroundColor: "#2d6a4f",
     paddingVertical: 14,
     borderRadius: 30,
     alignItems: "center",
     marginBottom: 20,
+    
   },
   loginText: {
     color: "#fff",
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: "bold",
+    fontFamily: 'AvenirNext-Regular',
   },
   divider: {
-    fontSize: 14,
+    fontSize: 15,
     color: "#444",
-    marginBottom: 15,
+    marginBottom: 20,
   },
   socialContainer: {
     flexDirection: "row",
