@@ -46,7 +46,9 @@ export default function SignupScreen({ navigation }) {
           value={name}
           onChangeText={setName}
         />
-        <Ionicons name="person-outline" size={20} color="#555" style={styles.icon} />
+        <View style={styles.iconWrapper}>
+          <Ionicons name="person-outline" size={30} color="#555" style={styles.icon} />
+        </View>
       </View>
 
       {/* Email Input */}
@@ -57,7 +59,9 @@ export default function SignupScreen({ navigation }) {
           value={email}
           onChangeText={setEmail}
         />
-        <Ionicons name="mail-outline" size={20} color="#555" style={styles.icon} />
+        <View style={styles.iconWrapper}>
+          <Ionicons name="mail-outline" size={30} color="#555" style={styles.icon} />
+        </View>
       </View>
 
       {/* Password Input */}
@@ -73,11 +77,13 @@ export default function SignupScreen({ navigation }) {
           style={styles.icon}
           onPress={() => setShowPassword(!showPassword)}
         >
+        <View style={styles.iconWrapper}>
           <Ionicons
             name={showPassword ? "eye-off-outline" : "eye-outline"}
-            size={20}
+            size={30}
             color="#555"
           />
+        </View>
         </TouchableOpacity>
       </View>
 
@@ -94,11 +100,13 @@ export default function SignupScreen({ navigation }) {
           style={styles.icon}
           onPress={() => setShowConfirmPassword(!showConfirmPassword)}
         >
+        <View style={styles.iconWrapper}>
           <Ionicons
             name={showConfirmPassword ? "eye-off-outline" : "eye-outline"}
-            size={20}
+            size={30}
             color="#555"
           />
+        </View>
         </TouchableOpacity>
       </View>
 
@@ -112,12 +120,12 @@ export default function SignupScreen({ navigation }) {
       {/* Social Sign Up */}
       <View style={styles.socialContainer}>
         <TouchableOpacity style={styles.socialBtn}>
-          <AntDesign name="google" size={20} color="#20340a" />
+          <AntDesign name="google" size={30} color="#20340a" />
           <Text style={styles.socialText}> Google</Text>
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.socialBtn}>
-          <AntDesign name="apple" size={20} color="#20340a" />
+          <AntDesign name="apple" size={30} color="#20340a" />
           <Text style={styles.socialText}> Apple</Text>
         </TouchableOpacity>
       </View>
@@ -136,135 +144,25 @@ export default function SignupScreen({ navigation }) {
   );
 }
 
-// (styles remain the same as your original code)
-
-
-
-// // screens/SignupScreen.js
-// import React, { useState } from "react";
-// import {
-//   StyleSheet,
-//   Text,
-//   View,
-//   TextInput,
-//   TouchableOpacity,
-// } from "react-native";
-// import { Ionicons, AntDesign } from "@expo/vector-icons";
-
-// export default function SignupScreen({ navigation }) {
-//   const [showPassword, setShowPassword] = useState(false);
-//   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-
-//   return (
-//     <View style={styles.container}>
-//       <Text style={styles.title}>Sign Up</Text>
-//       <Text style={styles.subtitle}>
-//         Create your account and start your journey with us 🌱
-//       </Text>
-
-//       {/* Name Input */}
-//       <View style={styles.inputContainer}>
-//         <TextInput placeholder="Full Name" style={styles.input} />
-//         <Ionicons name="person-outline" size={20} color="#555" style={styles.icon} />
-//       </View>
-
-//       {/* Email Input */}
-//       <View style={styles.inputContainer}>
-//         <TextInput placeholder="Email" style={styles.input} />
-//         <Ionicons name="mail-outline" size={20} color="#555" style={styles.icon} />
-//       </View>
-
-//       {/* Password Input */}
-//       <View style={styles.inputContainer}>
-//         <TextInput
-//           placeholder="Password"
-//           style={styles.input}
-//           secureTextEntry={!showPassword}
-//         />
-//         <TouchableOpacity
-//           style={styles.icon}
-//           onPress={() => setShowPassword(!showPassword)}
-//         >
-//           <Ionicons
-//             name={showPassword ? "eye-off-outline" : "eye-outline"}
-//             size={20}
-//             color="#555"
-//           />
-//         </TouchableOpacity>
-//       </View>
-
-//       {/* Confirm Password Input */}
-//       <View style={styles.inputContainer}>
-//         <TextInput
-//           placeholder="Confirm Password"
-//           style={styles.input}
-//           secureTextEntry={!showConfirmPassword}
-//         />
-//         <TouchableOpacity
-//           style={styles.icon}
-//           onPress={() => setShowConfirmPassword(!showConfirmPassword)}
-//         >
-//           <Ionicons
-//             name={showConfirmPassword ? "eye-off-outline" : "eye-outline"}
-//             size={20}
-//             color="#555"
-//           />
-//         </TouchableOpacity>
-//       </View>
-
-//       {/* Sign Up Button */}
-//       <TouchableOpacity
-//         style={styles.signupBtn}
-//         onPress={() => navigation.navigate("Home")} // after signup, go to Home
-//       >
-//         <Text style={styles.signupText}>Sign Up</Text>
-//       </TouchableOpacity>
-
-//       <Text style={styles.divider}>Or</Text>
-
-//       {/* Social Sign Up */}
-//       <View style={styles.socialContainer}>
-//         <TouchableOpacity style={styles.socialBtn}>
-//           <AntDesign name="google" size={20} color="#20340a" />
-//           <Text style={styles.socialText}> Google</Text>
-//         </TouchableOpacity>
-
-//         <TouchableOpacity style={styles.socialBtn}>
-//           <AntDesign name="apple" size={20} color="#20340a" />
-//           <Text style={styles.socialText}> Apple</Text>
-//         </TouchableOpacity>
-//       </View>
-
-//       {/* Footer */}
-//       <Text style={styles.footer}>
-//         Already have an account?{" "}
-//         <Text
-//           style={styles.link}
-//           onPress={() => navigation.navigate("Login")}
-//         >
-//           Login
-//         </Text>
-//       </Text>
-//     </View>
-//   );
-// }
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#eef2e6",
     alignItems: "center",
     justifyContent: "center",
-    padding: 20,
+    padding: 40,
   },
   title: {
-    fontSize: 28,
+    fontSize: 40,
+    fontFamily: 'AvenirNext-Bold',
     fontWeight: "bold",
     color: "#2d4a22",
-    marginBottom: 8,
+    marginBottom: 20,
+    marginRight: 'auto',
   },
   subtitle: {
-    fontSize: 14,
+    fontFamily: 'AvenirNext-Medium',
+    fontSize: 16,
     color: "#555",
     textAlign: "center",
     marginBottom: 25,
@@ -283,9 +181,23 @@ const styles = StyleSheet.create({
   input: {
     flex: 1,
     fontSize: 14,
+    fontFamily: 'AvenirNext-Regular',
   },
   icon: {
-    marginLeft: 10,
+    // marginLeft: 10,
+  },
+  iconWrapper: {
+  width: 50,
+  height: 50,
+  borderRadius: 50,
+  backgroundColor: "#fff",
+  justifyContent: "center",
+  alignItems: "center",
+  shadowColor: "#000",
+  shadowOffset: { width: 0, height: 2 },
+  shadowOpacity: 0.1,
+  shadowRadius: 3,
+  elevation: 2,
   },
   signupBtn: {
     width: "100%",
@@ -294,14 +206,16 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     alignItems: "center",
     marginBottom: 20,
+    marginTop: 20,
   },
   signupText: {
+    fontFamily: 'AvenirNext-Bold',
     color: "#fff",
-    fontSize: 16,
+    fontSize: 20,
     fontWeight: "bold",
   },
   divider: {
-    fontSize: 14,
+    fontSize: 15,
     color: "#444",
     marginBottom: 15,
   },
@@ -326,17 +240,20 @@ const styles = StyleSheet.create({
     shadowRadius: 5,
   },
   socialText: {
-    fontSize: 14,
+    fontFamily: 'AvenirNext-Medium',
+    fontSize: 18,
     fontWeight: "bold",
     marginLeft: 5,
     color: '#20340a',
   },
   footer: {
-    fontSize: 14,
+    fontFamily: 'AvenirNext-Regular',
+    fontSize: 15,
     marginTop: 10,
   },
   link: {
-    fontSize: 14,
+    fontFamily: 'AvenirNext-Medium',
+    fontSize: 15,
     color: "#2d6a4f",
     fontWeight: "500",
   },

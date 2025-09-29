@@ -78,12 +78,12 @@ export default function LoginScreen({ navigation }) {
       {/* Social Login */}
       <View style={styles.socialContainer}>
         <TouchableOpacity style={styles.socialBtn}>
-          <AntDesign name="google" size={20} color="#20340a" />
+          <AntDesign name="google" size={30} color="#20340a" />
           <Text style={styles.socialText}> Google</Text>
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.socialBtn}>
-          <AntDesign name="apple" size={20} color="#20340a" />
+          <AntDesign name="apple" size={30} color="#20340a" />
           <Text style={styles.socialText}> Apple</Text>
         </TouchableOpacity>
       </View>
@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
     fontFamily: 'AvenirNext-Regular',
   },
   icon: {
-    marginLeft: 10,
+    // marginLeft: 10,
   },
   iconWrapper: {
   width: 50,
@@ -162,12 +162,12 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   rememberText: {
-    fontSize: 14,
+    fontSize: 15,
     color: "#444",
     fontFamily: 'AvenirNext-Regular',
   },
   link: {
-    fontSize: 14,
+    fontSize: 15,
     color: "#2d6a4f",
     fontWeight: "500",
     fontFamily: 'AvenirNext-Regular',
@@ -180,15 +180,15 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     alignItems: "center",
     marginBottom: 20,
-    
   },
   loginText: {
     color: "#fff",
     fontSize: 18,
     fontWeight: "bold",
-    fontFamily: 'AvenirNext-Regular',
+    fontFamily: 'AvenirNext-Bold',
   },
   divider: {
+    fontFamily: 'AvenirNext-Regular',
     fontSize: 15,
     color: "#444",
     marginBottom: 20,
@@ -214,13 +214,21 @@ const styles = StyleSheet.create({
     shadowRadius: 5,
   },
   socialText: {
-    fontSize: 14,
+    fontFamily: 'AvenirNext-Regular',
+    fontSize: 18,
     fontWeight: "bold",
     marginLeft: 5,
     color: "#20340a",
   },
   footer: {
-    fontSize: 14,
+    fontFamily: 'AvenirNext-Regular',
+    fontSize: 15,
     marginTop: 10,
+  },
+  link: {
+    fontFamily: 'AvenirNext-Medium',
+    fontSize: 15,
+    color: "#2d6a4f",
+    fontWeight: "500",
   },
 });
