@@ -60,7 +60,7 @@ export default function LoginScreen({ navigation }) {
           />
           <Text style={styles.rememberText}> Remember Me</Text>
         </View>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('ForgotPassword')}>
           <Text style={styles.link}>Forgot Password?</Text>
         </TouchableOpacity>
       </View>
@@ -183,7 +183,7 @@ const styles = StyleSheet.create({
   },
   loginText: {
     color: "#fff",
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: "bold",
     fontFamily: 'AvenirNext-Bold',
   },
