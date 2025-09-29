@@ -47,7 +47,7 @@ export default function SignupScreen({ navigation }) {
           onChangeText={setName}
         />
         <View style={styles.iconWrapper}>
-          <Ionicons name="person-outline" size={30} color="#555" style={styles.icon} />
+          <Ionicons name="person-outline" size={30} color="#20340a" style={styles.icon} />
         </View>
       </View>
 
@@ -60,7 +60,7 @@ export default function SignupScreen({ navigation }) {
           onChangeText={setEmail}
         />
         <View style={styles.iconWrapper}>
-          <Ionicons name="mail-outline" size={30} color="#555" style={styles.icon} />
+          <Ionicons name="mail-outline" size={30} color="#20340a" style={styles.icon} />
         </View>
       </View>
 
@@ -81,7 +81,7 @@ export default function SignupScreen({ navigation }) {
           <Ionicons
             name={showPassword ? "eye-off-outline" : "eye-outline"}
             size={30}
-            color="#555"
+            color="#20340a"
           />
         </View>
         </TouchableOpacity>
@@ -104,7 +104,7 @@ export default function SignupScreen({ navigation }) {
           <Ionicons
             name={showConfirmPassword ? "eye-off-outline" : "eye-outline"}
             size={30}
-            color="#555"
+            color="#20340a"
           />
         </View>
         </TouchableOpacity>
@@ -120,12 +120,12 @@ export default function SignupScreen({ navigation }) {
       {/* Social Sign Up */}
       <View style={styles.socialContainer}>
         <TouchableOpacity style={styles.socialBtn}>
-          <AntDesign name="google" size={30} color="#20340a" />
+          <AntDesign name="google" size={30} color="#516B22" />
           <Text style={styles.socialText}> Google</Text>
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.socialBtn}>
-          <AntDesign name="apple" size={30} color="#20340a" />
+          <AntDesign name="apple" size={30} color="#516B22" />
           <Text style={styles.socialText}> Apple</Text>
         </TouchableOpacity>
       </View>
@@ -182,6 +182,7 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: 14,
     fontFamily: 'AvenirNext-Regular',
+    color: '#333',
   },
   icon: {
     // marginLeft: 10,

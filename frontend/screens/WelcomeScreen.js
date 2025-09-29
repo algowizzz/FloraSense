@@ -29,7 +29,7 @@ export default function WelcomeScreen({ navigation }) {
       </TouchableOpacity>
 
       {/* Divider */}
-      <Text style={styles.divider}>or</Text>
+      <Text style={styles.divider}>OR</Text>
 
       {/* Continue with Email → goes to Signup first */}
       <TouchableOpacity
@@ -48,22 +48,24 @@ const styles = StyleSheet.create({
     backgroundColor: "#eef2e6",
     alignItems: "center",
     justifyContent: "center",
-    padding: 20,
+    padding: 40,
   },
   icon: {
     marginBottom: 20,
   },
   title: {
-    fontSize: 32,
+    fontSize: 50,
+    fontFamily: 'AvenirNext-Bold',
     fontWeight: "bold",
     color: "#2d6a4f",
-    marginBottom: 10,
+    marginBottom: 60,
   },
   subtitle: {
     fontSize: 14,
+    fontFamily: 'AvenirNext-Medium',
     color: "#444",
     textAlign: "center",
-    marginBottom: 30,
+    marginBottom: 50,
   },
   socialBtn: {
     flexDirection: "row",
@@ -80,15 +82,17 @@ const styles = StyleSheet.create({
     shadowRadius: 5,
   },
   socialText: {
-    fontSize: 14,
+    fontSize: 15,
+    fontFamily: 'AvenirNext-Medium',
     fontWeight: "bold",
     marginLeft: 8,
     color: "#20340a",
   },
   divider: {
-    fontSize: 14,
+    fontSize: 15,
+    fontFamily: 'AvenirNext-Medium',
     color: "#444",
-    marginVertical: 15,
+    marginVertical: 20,
   },
   emailBtn: {
     width: "100%",
@@ -96,10 +100,12 @@ const styles = StyleSheet.create({
     paddingVertical: 14,
     borderRadius: 30,
     alignItems: "center",
+    marginTop: 10,
   },
   emailText: {
     color: "#fff",
     fontSize: 16,
+    fontFamily: 'AvenirNext-Bold',
     fontWeight: "bold",
   },
 });
