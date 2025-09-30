@@ -56,7 +56,8 @@ export default function LoginScreen({ navigation }) {
           <Switch
             value={rememberMe}
             onValueChange={setRememberMe}
-            thumbColor={rememberMe ? "#2d6a4f" : "#000000ff"}
+            trackColor={{ false: '#ccc', true: '#6e975b' }}
+            thumbColor={rememberMe ? "#213b19" : "#908f8fff"}
           />
           <Text style={styles.rememberText}> Remember Me</Text>
         </View>
@@ -111,14 +112,14 @@ const styles = StyleSheet.create({
     fontSize: 40,
     fontFamily: 'AvenirNext-Bold',
     fontWeight: "bold",
-    color: "#1f4013",
+    color: "#213b19",
     marginBottom: 20,
     marginRight: 'auto',
   },
   subtitle: {
     fontFamily: 'AvenirNext-Regular',
     fontSize: 15,
-    color: "#7f8278",
+    color: "#84887b",
     textAlign: "center",
     marginBottom: 25,
     lineHeight: 20,
@@ -145,7 +146,7 @@ const styles = StyleSheet.create({
   width: 50,
   height: 50,
   borderRadius: 50,
-  backgroundColor: "#f9feef",
+  backgroundColor: "#faffec",
   justifyContent: "center",
   alignItems: "center",
   shadowColor: "#000",
@@ -206,7 +207,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     paddingVertical: 12,
     borderRadius: 30,
-    backgroundColor: "#f9feef",
+    backgroundColor: "#f3f7ec",
     marginHorizontal: 5,
     elevation: 2,
     shadowColor: "#000",
@@ -218,7 +219,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
     marginLeft: 5,
-    color: "#20340a",
+    color: "#1b3814",
   },
   footer: {
     fontFamily: 'AvenirNext-Regular',
