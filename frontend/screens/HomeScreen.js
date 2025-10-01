@@ -2,237 +2,282 @@ import React, { useState } from "react";
 import {
   View,
   Text,
-  StyleSheet,
+  FlatList,
   ScrollView,
   Image,
   TouchableOpacity,
+  StyleSheet,
 } from "react-native";
-import { Card, IconButton } from "react-native-paper";
-import { Ionicons } from "@expo/vector-icons";
 
-export default function HomeScreen({ navigation }) {
-  const [active, setActive] = useState("home"); // <-- add this
+import { Ionicons } from "@expo/vector-icons";
+import { plants } from "../../data/plant";
+
+export default function HomeScreen() {
+  const [activeTab, setActiveTab] = useState("All");
+  const [activeNav, setActiveNav] = useState("home");
+
+  const categories = ["All", "Indoor", "Outdoor", "Succulents", "Flowering", "Herbs", "AirPurifiers"];
+
+  const filteredPlants =
+    activeTab === "All" ? plants : plants.filter((p) => p.category === activeTab);
+
+  const renderPlantCard = ({ item }) => (
+    <View style={styles.card}>
+      <TouchableOpacity style={styles.heartBtn}>
+        <Ionicons name="heart" size={30} color="#1B4332" />
+      </TouchableOpacity>
+
+      <Image source={{ uri: item.image }} style={styles.plantImage} resizeMode="contain" />
+
+      <View style={styles.cardFooter}>
+        <View>
+          <Text style={styles.plantName}>{item.name}</Text>
+          <Text style={styles.price}>{item.price}</Text>
+        </View>
+        <TouchableOpacity style={styles.arrowBtn}>
+          <Ionicons name="arrow-forward" size={30} color="white" />
+        </TouchableOpacity>
+      </View>
+    </View>
+  );
 
   return (
     <View style={styles.container}>
-      {/* Header Title + Search */}
+      {/* Header */}
       <View style={styles.header}>
         <Text style={styles.title}>
           Find Your{"\n"}
           <Text style={styles.highlight}>Favorite Plants</Text>
         </Text>
-        <IconButton
-          icon="magnify"
-          size={40}
-          style={styles.searchBtn}
-          iconColor="#2F4F1C"
+        <TouchableOpacity style={styles.searchBtn}>
+          <Ionicons name="search" size={40} color="#1B4332" />
+        </TouchableOpacity>
+      </View>
+
+      {/* Category Tabs (only show on Home) */}
+      {activeNav === "home" && (
+        <View style={styles.tabsContainer}>
+          <ScrollView
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={{ paddingHorizontal: 15 }}
+          >
+            {categories.map((tab) => (
+              <TouchableOpacity
+                key={tab}
+                style={[styles.tab, activeTab === tab && styles.tabActive]}
+                onPress={() => setActiveTab(tab)}
+              >
+                <Text style={[styles.tabText, activeTab === tab && styles.tabTextActive]}>
+                  {tab}
+                </Text>
+              </TouchableOpacity>
+            ))}
+          </ScrollView>
+        </View>
+      )}
+
+      {/* Screens based on activeNav */}
+      {activeNav === "home" && (
+        <FlatList
+          data={filteredPlants}
+          keyExtractor={(item) => item.id}
+          renderItem={renderPlantCard}
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={{ paddingBottom: -100, paddingHorizontal: 20 }}
         />
-      </View>
+      )}
 
-      {/* Category Tabs */}
-      <View style={styles.tabs}>
-        <TouchableOpacity style={[styles.tab, styles.tabActive]}>
-          <Text style={[styles.tabText, { color: "white" }]}>All</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.tab}>
-          <Text style={styles.tabText}>Indoor</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.tab}>
-          <Text style={styles.tabText}>Outdoor</Text>
-        </TouchableOpacity>
-      </View>
+      {activeNav === "cart" && (
+        <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+          <Text style={{ fontSize: 22, fontWeight: "bold" }}>🛒 Cart Screen</Text>
+        </View>
+      )}
 
-      {/* Plant Cards */}
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <Card style={styles.card}>
-          <Card.Content>
-            <Image
-              source={{
-                uri: "https://pngimg.com/uploads/monstera/monstera_PNG24.png",
-              }}
-              style={styles.plantImage}
-              resizeMode="contain"
-            />
+      {activeNav === "heart" && (
+        <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+          <Text style={{ fontSize: 22, fontWeight: "bold" }}>❤️ Favorites Screen</Text>
+        </View>
+      )}
 
-            {/* Heart Button */}
-            <IconButton
-              icon="heart-outline"
-              size={20}
-              style={styles.heartBtn}
-              iconColor="#2F4F1C"
-            />
-
-            {/* Plant Name + Price */}
-            <Text style={styles.plantName}>Monstera Deliciosa</Text>
-            <Text style={styles.price}>$99</Text>
-
-            {/* Arrow Button */}
-            <TouchableOpacity style={styles.arrowBtn}>
-              <Ionicons name="arrow-forward" size={20} color="white" />
-            </TouchableOpacity>
-          </Card.Content>
-        </Card>
-      </ScrollView>
+      {activeNav === "person" && (
+        <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+          <Text style={{ fontSize: 22, fontWeight: "bold" }}>👤 Profile Screen</Text>
+        </View>
+      )}
 
       {/* Bottom Navigation */}
       <View style={styles.navContainer}>
-        {/* Home */}
-        <TouchableOpacity
-          style={[styles.navItem, active === "home" && styles.activeItem]}
-          onPress={() => setActive("home")}
-        >
-          <Ionicons
-            name="home"
-            size={28}
-            color={active === "home" ? "#2D6A4F" : "#A8D5BA"}
-          />
-        </TouchableOpacity>
-
-        {/* Cart */}
-        <TouchableOpacity
-          style={[styles.navItem, active === "cart" && styles.activeItem]}
-          onPress={() => setActive("cart")}
-        >
-          <Ionicons
-            name="cart"
-            size={28}
-            color={active === "cart" ? "#2D6A4F" : "#A8D5BA"}
-          />
-        </TouchableOpacity>
-
-        {/* Favorites */}
-        <TouchableOpacity
-          style={[styles.navItem, active === "heart" && styles.activeItem]}
-          onPress={() => setActive("heart")}
-        >
-          <Ionicons
-            name="heart-outline"
-            size={28}
-            color={active === "heart" ? "#2D6A4F" : "#A8D5BA"}
-          />
-        </TouchableOpacity>
-
-        {/* Profile */}
-        <TouchableOpacity
-          style={[styles.navItem, active === "person" && styles.activeItem]}
-          onPress={() => setActive("person")}
-        >
-          <Ionicons
-            name="person-outline"
-            size={28}
-            color={active === "person" ? "#2D6A4F" : "#A8D5BA"}
-          />
-        </TouchableOpacity>
+        {[
+          { key: "home", icon: "home" },
+          { key: "cart", icon: "cart" },
+          { key: "heart", icon: "heart" },
+          { key: "person", icon: "person" },
+        ].map((nav) => (
+          <TouchableOpacity
+            key={nav.key}
+            style={[styles.navItem, activeNav === nav.key && styles.activeNavItem]}
+            onPress={() => setActiveNav(nav.key)}
+          >
+            <Ionicons
+              name={nav.icon}
+              size={24}
+              color={activeNav === nav.key ? "#1B4332" : "#DDE5D8"}
+            />
+          </TouchableOpacity>
+        ))}
       </View>
     </View>
   );
 }
 
+
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#F1F5EC",
-    paddingHorizontal: 30,
-    paddingTop: 80,
+  container: { 
+    flex: 1, 
+    backgroundColor: "#F0F5EC", 
+    paddingTop: 80, 
+    padding: 15,
   },
+
   header: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "flex-start",
+    paddingHorizontal: 20,
   },
-  title: {
-    fontSize: 30,
-    fontWeight: "600",
-    color: "#333",
+
+  title: { 
+    fontSize: 20, 
+    color: "#333", 
+    fontWeight: "400", 
+    fontFamily: "AvenirNext-Medium" 
   },
-  highlight: {
-    color: "#2F4F1C",
-    fontWeight: "700",
-    fontSize: 40,
+
+  highlight: { 
+    fontSize: 40, 
+    fontWeight: "bold", 
+    color: "#1B4332", 
+    fontFamily: "AvenirNext-Bold"
   },
+
   searchBtn: {
-    backgroundColor: "#DDE7D1",
-  },
-  tabs: {
-    flexDirection: "row",
-    marginVertical: 20,
-  },
-  tab: {
-    paddingHorizontal: 18,
-    paddingVertical: 8,
-    borderRadius: 50,
-    marginRight: 10,
-    backgroundColor: "#E6E6E6",
-  },
-  tabActive: {
-    backgroundColor: "#2F4F1C",
-  },
-  tabText: {
-    fontSize: 25,
-    fontFamily: "AvenirNext-Medium",
-    color: "#333",
-  },
-  card: {
-    backgroundColor: "#DDE7D1",
-    borderRadius: 20,
-    marginBottom: 20,
+    backgroundColor: "#DDEEDC",
     padding: 10,
+    borderRadius: 50,
   },
+  
+  tab: {
+    
+    backgroundColor: "#E6E6E6",
+    paddingHorizontal: 30,
+    paddingVertical: 20,
+    borderRadius: 40,
+    marginRight: 10,
+    marginBottom: 10,
+  },
+
+  tabActive: { 
+    backgroundColor: "#1B4332" 
+  },
+
+  tabText: { 
+    fontSize: 20, 
+    color: "#333" ,
+    fontFamily: "AvenirNext-Medium"
+  },
+
+  tabTextActive: { 
+    color: "#fff" 
+  },
+
+  tabsContainer: {
+    marginTop: 20,
+    marginBottom: 10,
+  },
+
+  card: {
+    backgroundColor: "#DDEEDC", 
+    borderRadius: 25,
+    padding: 20,
+    marginBottom: 30,
+    width: "100%",  
+    alignSelf: "center",
+  },
+
   plantImage: {
     width: "100%",
-    height: 150,
+    height: 350,
+    marginBottom: 20,
+    borderRadius: 50,
+    resizeMode: "contain",
+    backgroundColor: "transparent", 
   },
+
   heartBtn: {
     position: "absolute",
-    top: 10,
-    right: 10,
-    backgroundColor: "white",
-  },
-  plantName: {
-    fontSize: 16,
-    fontWeight: "600",
-    marginTop: 10,
-    color: "#333",
-  },
-  price: {
-    fontSize: 16,
-    fontWeight: "700",
-    marginBottom: 10,
-    color: "#333",
-  },
-  arrowBtn: {
-    backgroundColor: "#2F4F1C",
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    alignItems: "center",
-    justifyContent: "center",
-    position: "absolute",
-    bottom: 20,
-    right: 20,
-  },
-  navContainer: {
-    flexDirection: "row",
-    justifyContent: "space-around",
-    alignItems: "center",
-    backgroundColor: "#1B4332",
+    top: 15,
+    right: 15,
+    backgroundColor: "rgba(255,255,255,0.9)",
     borderRadius: 50,
     padding: 10,
-    marginHorizontal: 20,
-    marginBottom: 20,
-    position: "absolute",
-    bottom: 0,
-    left: 0,
-    right: 0,
+    zIndex: 1,
   },
+
+  cardFooter: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+
+  plantName: {
+    fontSize: 25,
+    fontWeight: "600",
+    color: "#1B4332",
+    fontFamily: "AvenirNext-Medium",
+  },
+
+  price: {
+    fontSize: 20,
+    fontWeight: "bold",
+    color: "#1B4332",
+    marginTop: 4,
+    fontFamily: "AvenirNext-Bold", 
+  },
+
+  arrowBtn: {
+    backgroundColor: "#1B4332",
+    width: 50,
+    height: 50,
+    borderRadius: 50,
+
+    justifyContent: "center",
+    alignItems: "center",
+  },
+
+  navContainer: {
+    position: "absolute",
+    bottom: 20,
+    left: 20,
+    right: 20,
+
+    flexDirection: "row",
+    justifyContent: "space-around",
+
+    backgroundColor: "#1B4332",
+    borderRadius: 50,
+    padding: 15,
+  },
+
   navItem: {
-    width: 60,
-    height: 60,
+    width: 55,
+    height: 55,
     borderRadius: 30,
     justifyContent: "center",
     alignItems: "center",
   },
-  activeItem: {
-    backgroundColor: "#FFFFFF",
+
+  activeNavItem: {
+    backgroundColor: "#fff",
   },
 });
