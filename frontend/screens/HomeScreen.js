@@ -12,9 +12,10 @@ import {
 import { Ionicons } from "@expo/vector-icons";
 import { plants } from "../../data/plant";
 
-export default function HomeScreen() {
+export default function HomeScreen({ navigation }) {
   const [activeTab, setActiveTab] = useState("All");
   const [activeNav, setActiveNav] = useState("home");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const categories = ["All", "Indoor", "Outdoor", "Succulents", "Flowering", "Herbs", "AirPurifiers"];
 
@@ -43,6 +44,14 @@ export default function HomeScreen() {
 
   return (
     <View style={styles.container}>
+      {/* App Logo (Top Left) */}
+      <View style={styles.logoContainer}>
+        <View style={styles.textWrapper}>
+          <Ionicons name="leaf-outline" size={20} color="#234821" style={styles.icon} />
+          <Text style={styles.logoText}>FLORASENSE</Text>
+        </View>
+      </View>
+
       {/* Header */}
       <View style={styles.header}>
         <Text style={styles.title}>
@@ -50,11 +59,11 @@ export default function HomeScreen() {
           <Text style={styles.highlight}>Favorite Plants</Text>
         </Text>
         <TouchableOpacity style={styles.searchBtn}>
-          <Ionicons name="search" size={40} color="#1B4332" />
+          <Ionicons name="search" size={20} color="#1B4332" />
         </TouchableOpacity>
       </View>
 
-      {/* Category Tabs (only show on Home) */}
+      {/* Category Tabs */}
       {activeNav === "home" && (
         <View style={styles.tabsContainer}>
           <ScrollView
@@ -77,7 +86,7 @@ export default function HomeScreen() {
         </View>
       )}
 
-      {/* Screens based on activeNav */}
+      {/* Screens */}
       {activeNav === "home" && (
         <FlatList
           data={filteredPlants}
@@ -88,19 +97,19 @@ export default function HomeScreen() {
         />
       )}
 
-      {activeNav === "cart" && (
+      {activeNav === "heart" && (
         <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
           <Text style={{ fontSize: 22, fontWeight: "bold" }}>🛒 Cart Screen</Text>
         </View>
       )}
 
-      {activeNav === "heart" && (
+      {activeNav === "cart" && (
         <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
           <Text style={{ fontSize: 22, fontWeight: "bold" }}>❤️ Favorites Screen</Text>
         </View>
       )}
 
-      {activeNav === "person" && (
+      {activeNav === "person" && isLoggedIn && (
         <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
           <Text style={{ fontSize: 22, fontWeight: "bold" }}>👤 Profile Screen</Text>
         </View>
@@ -110,14 +119,25 @@ export default function HomeScreen() {
       <View style={styles.navContainer}>
         {[
           { key: "home", icon: "home" },
-          { key: "cart", icon: "cart" },
+
           { key: "heart", icon: "heart" },
+          { key: "cart", icon: "cart" },
           { key: "person", icon: "person" },
         ].map((nav) => (
           <TouchableOpacity
             key={nav.key}
             style={[styles.navItem, activeNav === nav.key && styles.activeNavItem]}
-            onPress={() => setActiveNav(nav.key)}
+            onPress={() => {
+              if (nav.key === "person") {
+                if (isLoggedIn) {
+                  navigation.navigate("Account", { setIsLoggedIn });
+                } else {
+                  navigation.navigate("Login", { setIsLoggedIn });
+                }
+              } else {
+                setActiveNav(nav.key);
+              }
+            }}
           >
             <Ionicons
               name={nav.icon}
@@ -132,12 +152,29 @@ export default function HomeScreen() {
 }
 
 
+
 const styles = StyleSheet.create({
   container: { 
     flex: 1, 
     backgroundColor: "#F0F5EC", 
     paddingTop: 80, 
     padding: 15,
+  },
+
+  logoContainer: {
+    position: "absolute",  
+    top: 60,         
+    left: 34,
+    alignItems: "center", 
+    zIndex: 1000,
+  },
+
+  logoText: {
+    fontSize: 20,
+    fontWeight: "bold",
+    color: "#234821",
+    marginTop: -3,  
+    fontFamily: "AvenirNext-Bold", 
   },
 
   header: {
@@ -149,13 +186,14 @@ const styles = StyleSheet.create({
 
   title: { 
     fontSize: 20, 
+    marginTop: 30, 
     color: "#333", 
     fontWeight: "400", 
     fontFamily: "AvenirNext-Medium" 
   },
 
   highlight: { 
-    fontSize: 40, 
+    fontSize: 30, 
     fontWeight: "bold", 
     color: "#1B4332", 
     fontFamily: "AvenirNext-Bold"
@@ -163,6 +201,7 @@ const styles = StyleSheet.create({
 
   searchBtn: {
     backgroundColor: "#DDEEDC",
+    marginTop: 50,
     padding: 10,
     borderRadius: 50,
   },
@@ -199,7 +238,7 @@ const styles = StyleSheet.create({
   card: {
     backgroundColor: "#DDEEDC", 
     borderRadius: 25,
-    padding: 20,
+    padding: 5,
     marginBottom: 30,
     width: "100%",  
     alignSelf: "center",
@@ -232,6 +271,7 @@ const styles = StyleSheet.create({
 
   plantName: {
     fontSize: 25,
+    marginLeft: 20,
     fontWeight: "600",
     color: "#1B4332",
     fontFamily: "AvenirNext-Medium",
@@ -239,6 +279,8 @@ const styles = StyleSheet.create({
 
   price: {
     fontSize: 20,
+    marginLeft: 20,
+    marginBottom: 5,
     fontWeight: "bold",
     color: "#1B4332",
     marginTop: 4,
@@ -247,6 +289,7 @@ const styles = StyleSheet.create({
 
   arrowBtn: {
     backgroundColor: "#1B4332",
+    marginRight: 20,
     width: 50,
     height: 50,
     borderRadius: 50,

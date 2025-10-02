@@ -7,6 +7,7 @@ import LoginScreen from './frontend/screens/LoginScreen';
 import SignupScreen from './frontend/screens/SignupScreen';
 import HomeScreen from './frontend/screens/HomeScreen';
 import ForgotPasswordScreen from "./frontend/screens/ForgotPassword";
+import AccountScreen from "./frontend/screens/AccountScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -37,6 +38,11 @@ export default function App() {
         <Stack.Screen
           name="ForgotPassword"
           component={ForgotPasswordScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Account"
+          component={AccountScreen}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

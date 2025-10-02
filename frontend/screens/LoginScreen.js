@@ -1,4 +1,3 @@
-// screens/LoginScreen.js
 import React, { useState } from "react";
 import {
   StyleSheet,
@@ -10,12 +9,21 @@ import {
 } from "react-native";
 import { Ionicons, AntDesign } from "@expo/vector-icons";
 
-export default function LoginScreen({ navigation }) {
+export default function LoginScreen({ navigation, route }) {
   const [rememberMe, setRememberMe] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
+  const setIsLoggedIn = route.params?.setIsLoggedIn;
+
   return (
     <View style={styles.container}>
+      <TouchableOpacity
+        style={styles.backBtn}
+        onPress={() => navigation.navigate("Home")}
+      >
+        <Ionicons name="arrow-back" size={28} color="black" />
+      </TouchableOpacity>
+
       <Text style={styles.title}>Login</Text>
       <Text style={styles.subtitle}>
         It’s time to return to the soil! Log in to your account and keep growing. 🌱
@@ -28,7 +36,6 @@ export default function LoginScreen({ navigation }) {
           <Ionicons name="mail-outline" size={30} color="#555" />
         </View>
       </View>
-
 
       {/* Password Input */}
       <View style={styles.inputContainer}>
@@ -49,7 +56,6 @@ export default function LoginScreen({ navigation }) {
         </TouchableOpacity>
       </View>
 
-
       {/* Remember Me & Forgot Password */}
       <View style={styles.options}>
         <View style={{ flexDirection: "row", alignItems: "center" }}>
@@ -69,7 +75,10 @@ export default function LoginScreen({ navigation }) {
       {/* Login Button */}
       <TouchableOpacity
         style={styles.loginBtn}
-        onPress={() => navigation.navigate("Home")}
+        onPress={() => {
+          setIsLoggedIn?.(true); // update state in Home
+          navigation.replace("Account", { setIsLoggedIn }); // go to Account
+        }}
       >
         <Text style={styles.loginText}>Login</Text>
       </TouchableOpacity>
@@ -100,6 +109,8 @@ export default function LoginScreen({ navigation }) {
   );
 }
 
+
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -107,6 +118,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     padding: 40,
+  },
+  backBtn: {
+    position: "absolute",
+    top: 50, 
+    left: 20,
+    zIndex: 10,
   },
   title: {
     fontSize: 40,
