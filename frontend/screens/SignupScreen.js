@@ -27,7 +27,6 @@ export default function SignupScreen({ navigation }) {
       Alert.alert("Error", "Passwords do not match!");
       return;
     }
-    // After validation, navigate to Home
     navigation.navigate("Home");
   };
 

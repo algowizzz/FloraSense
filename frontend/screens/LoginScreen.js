@@ -9,14 +9,13 @@ import {
 } from "react-native";
 import { Ionicons, AntDesign } from "@expo/vector-icons";
 
-export default function LoginScreen({ navigation, route }) {
+export default function LoginScreen({ navigation }) {
   const [rememberMe, setRememberMe] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
-  const setIsLoggedIn = route.params?.setIsLoggedIn;
-
   return (
     <View style={styles.container}>
+      {/* 🔙 Back Button */}
       <TouchableOpacity
         style={styles.backBtn}
         onPress={() => navigation.navigate("Home")}
@@ -24,12 +23,13 @@ export default function LoginScreen({ navigation, route }) {
         <Ionicons name="arrow-back" size={28} color="black" />
       </TouchableOpacity>
 
+      {/* 🏷️ Title */}
       <Text style={styles.title}>Login</Text>
       <Text style={styles.subtitle}>
         It’s time to return to the soil! Log in to your account and keep growing. 🌱
       </Text>
 
-      {/* Email Input */}
+      {/* ✉️ Email Input */}
       <View style={styles.inputContainer}>
         <TextInput placeholder="Email" style={styles.input} />
         <View style={styles.iconWrapper}>
@@ -37,7 +37,7 @@ export default function LoginScreen({ navigation, route }) {
         </View>
       </View>
 
-      {/* Password Input */}
+      {/* 🔒 Password Input */}
       <View style={styles.inputContainer}>
         <TextInput
           placeholder="Password"
@@ -56,49 +56,45 @@ export default function LoginScreen({ navigation, route }) {
         </TouchableOpacity>
       </View>
 
-      {/* Remember Me & Forgot Password */}
+      {/* 🧠 Remember Me & Forgot Password */}
       <View style={styles.options}>
         <View style={{ flexDirection: "row", alignItems: "center" }}>
           <Switch
             value={rememberMe}
             onValueChange={setRememberMe}
-            trackColor={{ false: '#ccc', true: '#6e975b' }}
+            trackColor={{ false: "#ccc", true: "#6e975b" }}
             thumbColor={rememberMe ? "#213b19" : "#908f8fff"}
           />
           <Text style={styles.rememberText}> Remember Me</Text>
         </View>
-        <TouchableOpacity onPress={() => navigation.navigate('ForgotPassword')}>
+
+        <TouchableOpacity onPress={() => navigation.navigate("ForgotPassword")}>
           <Text style={styles.link}>Forgot Password?</Text>
         </TouchableOpacity>
       </View>
 
-      {/* Login Button */}
+      {/* 🔘 Login Button */}
       <TouchableOpacity
         style={styles.loginBtn}
-        onPress={() => {
-          setIsLoggedIn?.(true); // update state in Home
-          navigation.replace("Account", { setIsLoggedIn }); // go to Account
-        }}
+        onPress={() => navigation.replace("Account")}
       >
         <Text style={styles.loginText}>Login</Text>
       </TouchableOpacity>
 
       <Text style={styles.divider}>Or</Text>
 
-      {/* Social Login */}
+      {/* 🌐 Social Logins */}
       <View style={styles.socialContainer}>
         <TouchableOpacity style={styles.socialBtn}>
           <AntDesign name="google" size={30} color="#20340a" />
-          <Text style={styles.socialText}> Google</Text>
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.socialBtn}>
           <AntDesign name="apple" size={30} color="#20340a" />
-          <Text style={styles.socialText}> Apple</Text>
         </TouchableOpacity>
       </View>
 
-      {/* Footer */}
+      {/* 🦶 Footer */}
       <Text style={styles.footer}>
         Don’t have an account yet?{" "}
         <Text style={styles.link} onPress={() => navigation.navigate("Signup")}>
@@ -119,12 +115,14 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     padding: 40,
   },
+
   backBtn: {
     position: "absolute",
     top: 50, 
     left: 20,
     zIndex: 10,
   },
+
   title: {
     fontSize: 40,
     fontFamily: 'AvenirNext-Bold',
@@ -133,6 +131,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     marginRight: 'auto',
   },
+
   subtitle: {
     fontFamily: 'AvenirNext-Regular',
     fontSize: 15,
@@ -141,6 +140,7 @@ const styles = StyleSheet.create({
     marginBottom: 25,
     lineHeight: 20,
   },
+
   inputContainer: {
     width: "100%",
     backgroundColor: "#dde2d3",
@@ -151,14 +151,13 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
   },
+
   input: {
     flex: 1,
     fontSize: 15,
     fontFamily: 'AvenirNext-Regular',
   },
-  icon: {
-    // marginLeft: 10,
-  },
+
   iconWrapper: {
   width: 50,
   height: 50,
@@ -172,6 +171,7 @@ const styles = StyleSheet.create({
   shadowRadius: 3,
   elevation: 2,
   },
+
   options: {
     width: "100%",
     flexDirection: "row",
@@ -179,17 +179,20 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginBottom: 20,
   },
+
   rememberText: {
     fontSize: 15,
     color: "#444",
     fontFamily: 'AvenirNext-Regular',
   },
+
   link: {
     fontSize: 15,
     color: "#648855",
     fontWeight: "500",
     fontFamily: 'AvenirNext-Regular',
   },
+
   loginBtn: {
     marginTop: 15,
     width: "100%",
@@ -199,24 +202,28 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginBottom: 20,
   },
+
   loginText: {
     color: "#fff",
     fontSize: 20,
     fontWeight: "bold",
     fontFamily: 'AvenirNext-Bold',
   },
+
   divider: {
     fontFamily: 'AvenirNext-Regular',
     fontSize: 15,
     color: "#444",
     marginBottom: 20,
   },
+
   socialContainer: {
     flexDirection: "row",
     width: "100%",
     justifyContent: "space-between",
     marginBottom: 20,
   },
+
   socialBtn: {
     flex: 1,
     flexDirection: "row",
@@ -231,19 +238,14 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 5,
   },
-  socialText: {
-    fontFamily: 'AvenirNext-Regular',
-    fontSize: 18,
-    fontWeight: "bold",
-    marginLeft: 5,
-    color: "#1b3814",
-  },
+
   footer: {
     fontFamily: 'AvenirNext-Regular',
     fontSize: 15,
     marginTop: 10,
     color: '#1e201b',
   },
+
   link: {
     fontFamily: 'AvenirNext-Medium',
     fontSize: 15,

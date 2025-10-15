@@ -47,7 +47,7 @@ export default function HomeScreen({ navigation }) {
       {/* App Logo (Top Left) */}
       <View style={styles.logoContainer}>
         <View style={styles.textWrapper}>
-          <Ionicons name="leaf-outline" size={20} color="#234821" style={styles.icon} />
+          <Ionicons name="leaf-outline" size={15} color="#234821" style={styles.icon} />
           <Text style={styles.logoText}>FLORASENSE</Text>
         </View>
       </View>
@@ -170,7 +170,7 @@ const styles = StyleSheet.create({
   },
 
   logoText: {
-    fontSize: 20,
+    fontSize: 15,
     fontWeight: "bold",
     color: "#234821",
     marginTop: -3,  
