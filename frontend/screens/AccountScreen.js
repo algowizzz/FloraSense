@@ -6,7 +6,7 @@ import { Ionicons } from "@expo/vector-icons";
 export default function AccountScreen({ navigation }) {
   return (
     <View style={styles.container}>
-      {/* Profile Image */}
+      {/* Profile */}
       <View style={styles.profileWrapper}>
         <Image
           source={{
@@ -20,7 +20,7 @@ export default function AccountScreen({ navigation }) {
       <Text style={styles.title}>John Doe</Text>
       <Text style={styles.subtitle}>johndoe@example.com</Text>
 
-      {/* Account Options */}
+      {/* Account */}
       <View style={styles.optionContainer}>
         <TouchableOpacity style={styles.optionRow}>
           <Ionicons name="cart-outline" size={24} color="#2d6a4f" />
@@ -61,6 +61,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 30,
   },
+
   profileWrapper: {
     width: 120,
     height: 120,
@@ -76,11 +77,13 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 4,
   },
+
   profileImage: {
     width: 100,
     height: 100,
     borderRadius: 50,
   },
+
   title: {
     fontSize: 28,
     fontFamily: "AvenirNext-Bold",
@@ -88,12 +91,14 @@ const styles = StyleSheet.create({
     color: "#2d4a22",
     marginTop: 10,
   },
+
   subtitle: {
     fontFamily: "AvenirNext-Medium",
     fontSize: 16,
     color: "#555",
     marginBottom: 30,
   },
+
   optionContainer: {
     width: "100%",
     backgroundColor: "#e3e8da",
@@ -101,6 +106,7 @@ const styles = StyleSheet.create({
     padding: 15,
     marginBottom: 30,
   },
+
   optionRow: {
     flexDirection: "row",
     alignItems: "center",
@@ -108,12 +114,14 @@ const styles = StyleSheet.create({
     borderBottomColor: "#ccc",
     borderBottomWidth: 0.5,
   },
+
   optionText: {
     fontSize: 16,
     fontFamily: "AvenirNext-Medium",
     marginLeft: 15,
     color: "#2d4a22",
   },
+
   logoutBtn: {
     width: "100%",
     backgroundColor: "#2d6a4f",
@@ -121,6 +129,7 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     alignItems: "center",
   },
+  
   logoutText: {
     fontFamily: "AvenirNext-Bold",
     color: "#fff",

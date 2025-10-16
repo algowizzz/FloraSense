@@ -29,15 +29,18 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+
   textWrapper: {
     position: "relative",
     alignItems: "center", 
   },
+
   icon: {
     position: "absolute",
     top: -50,
     alignItems: "center",
   },
+  
   title: {
     fontSize: 50,
     fontWeight: "bold",

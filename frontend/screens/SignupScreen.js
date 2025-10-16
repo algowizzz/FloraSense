@@ -151,6 +151,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     padding: 40,
   },
+
   title: {
     fontSize: 40,
     fontFamily: 'AvenirNext-Bold',
@@ -159,6 +160,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     marginRight: 'auto',
   },
+
   subtitle: {
     fontFamily: 'AvenirNext-Medium',
     fontSize: 16,
@@ -167,6 +169,7 @@ const styles = StyleSheet.create({
     marginBottom: 25,
     lineHeight: 20,
   },
+
   inputContainer: {
     width: "100%",
     backgroundColor: "#e3e8da",
@@ -177,15 +180,14 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
   },
+
   input: {
     flex: 1,
     fontSize: 14,
     fontFamily: 'AvenirNext-Regular',
     color: '#333',
   },
-  icon: {
-    // marginLeft: 10,
-  },
+
   iconWrapper: {
   width: 50,
   height: 50,
@@ -199,6 +201,7 @@ const styles = StyleSheet.create({
   shadowRadius: 3,
   elevation: 2,
   },
+
   signupBtn: {
     width: "100%",
     backgroundColor: "#2d6a4f",
@@ -208,23 +211,27 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     marginTop: 20,
   },
+
   signupText: {
     fontFamily: 'AvenirNext-Bold',
     color: "#fff",
     fontSize: 20,
     fontWeight: "bold",
   },
+
   divider: {
     fontSize: 15,
     color: "#444",
     marginBottom: 15,
   },
+
   socialContainer: {
     flexDirection: "row",
     width: "100%",
     justifyContent: "space-between",
     marginBottom: 20,
   },
+
   socialBtn: {
     flex: 1,
     flexDirection: "row",
@@ -239,6 +246,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 5,
   },
+
   socialText: {
     fontFamily: 'AvenirNext-Medium',
     fontSize: 18,
@@ -246,11 +254,13 @@ const styles = StyleSheet.create({
     marginLeft: 5,
     color: '#20340a',
   },
+
   footer: {
     fontFamily: 'AvenirNext-Regular',
     fontSize: 15,
     marginTop: 10,
   },
+  
   link: {
     fontFamily: 'AvenirNext-Medium',
     fontSize: 15,

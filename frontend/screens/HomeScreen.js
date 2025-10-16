@@ -44,7 +44,7 @@ export default function HomeScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
-      {/* App Logo (Top Left) */}
+      {/* App Logo */}
       <View style={styles.logoContainer}>
         <View style={styles.textWrapper}>
           <Ionicons name="leaf-outline" size={15} color="#234821" style={styles.icon} />
@@ -292,7 +292,6 @@ const styles = StyleSheet.create({
     width: 50,
     height: 50,
     borderRadius: 50,
-
     justifyContent: "center",
     alignItems: "center",
   },
@@ -302,10 +301,8 @@ const styles = StyleSheet.create({
     bottom: 20,
     left: 20,
     right: 20,
-
     flexDirection: "row",
     justifyContent: "space-around",
-
     backgroundColor: "#1B4332",
     borderRadius: 50,
     padding: 15,

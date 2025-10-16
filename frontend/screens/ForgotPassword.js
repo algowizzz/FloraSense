@@ -15,7 +15,7 @@ export default function ForgotPasswordScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
-      {/* Back Button (absolute top-left) */}
+      {/* Back Button */}
       <TouchableOpacity
         style={styles.backBtn}
         onPress={() => navigation.navigate("Login")}
@@ -70,12 +70,14 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     padding: 40,
   },
+
   backBtn: {
     position: "absolute",
-    top: 50, // adjust for notch
+    top: 50,
     left: 20,
     zIndex: 10,
   },
+
   title: {
     fontSize: 40,
     fontFamily: "AvenirNext-Bold",
@@ -84,6 +86,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     marginRight: "auto",
   },
+
   subtitle: {
     fontFamily: "AvenirNext-Regular",
     fontSize: 15,
@@ -92,6 +95,7 @@ const styles = StyleSheet.create({
     marginBottom: 25,
     lineHeight: 20,
   },
+
   inputContainer: {
     width: "100%",
     backgroundColor: "#e3e8da",
@@ -102,11 +106,13 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
   },
+
   input: {
     flex: 1,
     fontSize: 15,
     fontFamily: "AvenirNext-Regular",
   },
+
   iconWrapper: {
     width: 50,
     height: 50,
@@ -120,6 +126,7 @@ const styles = StyleSheet.create({
     shadowRadius: 3,
     elevation: 2,
   },
+
   resetBtn: {
     marginTop: 20,
     width: "100%",
@@ -129,17 +136,20 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginBottom: 20,
   },
+
   resetText: {
     fontWeight: "bold",
     color: "#fff",
     fontFamily: "AvenirNext-Bold",
     fontSize: 18, 
   },
+
   footer: {
     fontFamily: "AvenirNext-Regular",
     fontSize: 15,
     marginTop: 10,
   },
+  
   link: {
     fontFamily: "AvenirNext-Medium",
     fontSize: 15,
