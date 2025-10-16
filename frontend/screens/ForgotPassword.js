@@ -28,7 +28,7 @@ export default function ForgotPasswordScreen({ navigation }) {
         Don’t worry! Just enter your email and we’ll send you a reset link.
       </Text>
 
-      {/* Email Input */}
+      {/* Email */}
       <View style={styles.inputContainer}>
         <TextInput
           placeholder="Email"
@@ -149,7 +149,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
     marginTop: 10,
   },
-  
+
   link: {
     fontFamily: "AvenirNext-Medium",
     fontSize: 15,

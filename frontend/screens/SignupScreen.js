@@ -37,7 +37,7 @@ export default function SignupScreen({ navigation }) {
         Create your account and start your journey with us 🌱
       </Text>
 
-      {/* Name Input */}
+      {/* Name */}
       <View style={styles.inputContainer}>
         <TextInput
           placeholder="Full Name"
@@ -50,7 +50,7 @@ export default function SignupScreen({ navigation }) {
         </View>
       </View>
 
-      {/* Email Input */}
+      {/* Email */}
       <View style={styles.inputContainer}>
         <TextInput
           placeholder="Email"
@@ -63,7 +63,7 @@ export default function SignupScreen({ navigation }) {
         </View>
       </View>
 
-      {/* Password Input */}
+      {/* Password */}
       <View style={styles.inputContainer}>
         <TextInput
           placeholder="Password"
@@ -86,7 +86,7 @@ export default function SignupScreen({ navigation }) {
         </TouchableOpacity>
       </View>
 
-      {/* Confirm Password Input */}
+      {/* Confirm Password */}
       <View style={styles.inputContainer}>
         <TextInput
           placeholder="Confirm Password"
@@ -109,14 +109,13 @@ export default function SignupScreen({ navigation }) {
         </TouchableOpacity>
       </View>
 
-      {/* Sign Up Button */}
+      {/* Sign Up */}
       <TouchableOpacity style={styles.signupBtn} onPress={handleSignup}>
         <Text style={styles.signupText}>Sign Up</Text>
       </TouchableOpacity>
-
       <Text style={styles.divider}>Or</Text>
 
-      {/* Social Sign Up */}
+      {/* Social */}
       <View style={styles.socialContainer}>
         <TouchableOpacity style={styles.socialBtn}>
           <AntDesign name="google" size={30} color="#516B22" />
