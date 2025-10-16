@@ -6,6 +6,14 @@ import { Ionicons } from "@expo/vector-icons";
 export default function AccountScreen({ navigation }) {
   return (
     <View style={styles.container}>
+      {/* Back Button */}
+      <TouchableOpacity
+        style={styles.backBtn}
+        onPress={() => navigation.navigate("Home")}
+      >
+        <Ionicons name="arrow-back" size={28} color="black" />
+      </TouchableOpacity>
+
       {/* Profile */}
       <View style={styles.profileWrapper}>
         <Image
@@ -17,8 +25,8 @@ export default function AccountScreen({ navigation }) {
       </View>
 
       {/* Name + Email */}
-      <Text style={styles.title}>John Doe</Text>
-      <Text style={styles.subtitle}>johndoe@example.com</Text>
+      <Text style={styles.title}>Hello</Text>
+      <Text style={styles.subtitle}>hello@example.com</Text>
 
       {/* Account */}
       <View style={styles.optionContainer}>
@@ -60,6 +68,13 @@ const styles = StyleSheet.create({
     backgroundColor: "#eef2e6",
     alignItems: "center",
     padding: 30,
+  },
+
+  backBtn: {
+    position: "absolute",
+    top: 50, 
+    left: 20,
+    zIndex: 10,
   },
 
   profileWrapper: {
@@ -129,7 +144,7 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     alignItems: "center",
   },
-  
+
   logoutText: {
     fontFamily: "AvenirNext-Bold",
     color: "#fff",

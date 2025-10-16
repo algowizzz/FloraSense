@@ -1,4 +1,4 @@
-// screens/WelcomeScreen.js
+// WelcomeScreen.js
 import React, { useEffect } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     top: -50,
     alignItems: "center",
   },
-  
+
   title: {
     fontSize: 50,
     fontWeight: "bold",

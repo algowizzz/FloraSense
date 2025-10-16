@@ -27,7 +27,7 @@ export default function SignupScreen({ navigation }) {
       Alert.alert("Error", "Passwords do not match!");
       return;
     }
-    navigation.navigate("Home");
+    navigation.navigate("Account");
   };
 
   return (
@@ -260,7 +260,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
     marginTop: 10,
   },
-  
+
   link: {
     fontFamily: 'AvenirNext-Medium',
     fontSize: 15,
