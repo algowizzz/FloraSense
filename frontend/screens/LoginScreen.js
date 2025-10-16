@@ -6,16 +6,27 @@ import {
   TextInput,
   TouchableOpacity,
   Switch,
+  Alert,
 } from "react-native";
 import { Ionicons, AntDesign } from "@expo/vector-icons";
 
 export default function LoginScreen({ navigation }) {
   const [rememberMe, setRememberMe] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleLogin = () => {
+    if (!email.trim() || !password.trim()) {
+      Alert.alert("Error", "Please enter both email and password.");
+      return;
+    }
+    navigation.replace("Account");
+  };
 
   return (
     <View style={styles.container}>
-      {/* 🔙 Back Button */}
+      {/* Back Button */}
       <TouchableOpacity
         style={styles.backBtn}
         onPress={() => navigation.navigate("Home")}
@@ -23,26 +34,33 @@ export default function LoginScreen({ navigation }) {
         <Ionicons name="arrow-back" size={28} color="black" />
       </TouchableOpacity>
 
-      {/* 🏷️ Title */}
+      {/* Title */}
       <Text style={styles.title}>Login</Text>
       <Text style={styles.subtitle}>
         It’s time to return to the soil! Log in to your account and keep growing. 🌱
       </Text>
 
-      {/* ✉️ Email Input */}
+      {/* Email Input */}
       <View style={styles.inputContainer}>
-        <TextInput placeholder="Email" style={styles.input} />
+        <TextInput
+          placeholder="Email"
+          style={styles.input}
+          value={email}
+          onChangeText={setEmail}
+        />
         <View style={styles.iconWrapper}>
           <Ionicons name="mail-outline" size={30} color="#555" />
         </View>
       </View>
 
-      {/* 🔒 Password Input */}
+      {/* Password Input */}
       <View style={styles.inputContainer}>
         <TextInput
           placeholder="Password"
           style={styles.input}
           secureTextEntry={!showPassword}
+          value={password}
+          onChangeText={setPassword}
         />
         <TouchableOpacity
           style={styles.iconWrapper}
@@ -56,7 +74,7 @@ export default function LoginScreen({ navigation }) {
         </TouchableOpacity>
       </View>
 
-      {/* 🧠 Remember Me & Forgot Password */}
+      {/* Remember Me & Forgot Password */}
       <View style={styles.options}>
         <View style={{ flexDirection: "row", alignItems: "center" }}>
           <Switch
@@ -73,17 +91,14 @@ export default function LoginScreen({ navigation }) {
         </TouchableOpacity>
       </View>
 
-      {/* 🔘 Login Button */}
-      <TouchableOpacity
-        style={styles.loginBtn}
-        onPress={() => navigation.replace("Account")}
-      >
+      {/* Login Button */}
+      <TouchableOpacity style={styles.loginBtn} onPress={handleLogin}>
         <Text style={styles.loginText}>Login</Text>
       </TouchableOpacity>
 
       <Text style={styles.divider}>Or</Text>
 
-      {/* 🌐 Social Logins */}
+      {/* Social Logins */}
       <View style={styles.socialContainer}>
         <TouchableOpacity style={styles.socialBtn}>
           <AntDesign name="google" size={30} color="#20340a" />
@@ -94,7 +109,7 @@ export default function LoginScreen({ navigation }) {
         </TouchableOpacity>
       </View>
 
-      {/* 🦶 Footer */}
+      {/* Footer */}
       <Text style={styles.footer}>
         Don’t have an account yet?{" "}
         <Text style={styles.link} onPress={() => navigation.navigate("Signup")}>

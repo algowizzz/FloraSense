@@ -119,7 +119,6 @@ export default function HomeScreen({ navigation }) {
       <View style={styles.navContainer}>
         {[
           { key: "home", icon: "home" },
-
           { key: "heart", icon: "heart" },
           { key: "cart", icon: "cart" },
           { key: "person", icon: "person" },
