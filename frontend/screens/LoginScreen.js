@@ -31,10 +31,9 @@ export default function LoginScreen({ navigation }) {
         style={styles.backBtn}
         onPress={() => navigation.navigate("Home")}
       >
-        <Ionicons name="arrow-back" size={28} color="black" />
+        <Ionicons name="arrow-back" size={20} color="black" />
       </TouchableOpacity>
 
-      {/* Title */}
       <Text style={styles.title}>Login</Text>
       <Text style={styles.subtitle}>
         It’s time to return to the soil! Log in to your account and keep growing. 🌱
@@ -49,7 +48,7 @@ export default function LoginScreen({ navigation }) {
           onChangeText={setEmail}
         />
         <View style={styles.iconWrapper}>
-          <Ionicons name="mail-outline" size={30} color="#555" />
+          <Ionicons name="mail-outline" size={20} color="#555" />
         </View>
       </View>
 
@@ -68,48 +67,46 @@ export default function LoginScreen({ navigation }) {
         >
           <Ionicons
             name={showPassword ? "eye-off-outline" : "eye-outline"}
-            size={30}
+            size={20}
             color="#555"
           />
         </TouchableOpacity>
       </View>
 
-      {/* Remember Me & Forgot Password */}
       <View style={styles.options}>
         <View style={{ flexDirection: "row", alignItems: "center" }}>
           <Switch
             value={rememberMe}
             onValueChange={setRememberMe}
             trackColor={{ false: "#ccc", true: "#6e975b" }}
-            thumbColor={rememberMe ? "#213b19" : "#908f8fff"}
+            thumbColor={rememberMe ? "#3e6a30" : "#908f8fff"}
           />
           <Text style={styles.rememberText}> Remember Me</Text>
         </View>
 
         <TouchableOpacity onPress={() => navigation.navigate("ForgotPassword")}>
-          <Text style={styles.link}>Forgot Password?</Text>
+          <Text style={styles.forgotPasswordLink}>Forgot Password?</Text>
         </TouchableOpacity>
       </View>
 
-      {/* Login Button */}
       <TouchableOpacity style={styles.loginBtn} onPress={handleLogin}>
         <Text style={styles.loginText}>Login</Text>
       </TouchableOpacity>
 
       <Text style={styles.divider}>Or</Text>
 
-      {/* Social Logins */}
       <View style={styles.socialContainer}>
         <TouchableOpacity style={styles.socialBtn}>
-          <AntDesign name="google" size={30} color="#20340a" />
+          <AntDesign name="google" size={20} color="#3e6a30" />
+          <Text style={styles.socialText}> Google</Text>
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.socialBtn}>
-          <AntDesign name="apple" size={30} color="#20340a" />
+          <AntDesign name="apple" size={20} color="#3e6a30" />
+          <Text style={styles.socialText}> Apple</Text>
         </TouchableOpacity>
       </View>
 
-      {/* Footer */}
       <Text style={styles.footer}>
         Don’t have an account yet?{" "}
         <Text style={styles.link} onPress={() => navigation.navigate("Signup")}>
@@ -139,12 +136,11 @@ const styles = StyleSheet.create({
   },
 
   title: {
-    fontSize: 40,
+    fontSize: 30,
     fontFamily: 'AvenirNext-Bold',
     fontWeight: "bold",
-    color: "#213b19",
+    color: "#3e6a30",
     marginBottom: 20,
-    marginRight: 'auto',
   },
 
   subtitle: {
@@ -160,8 +156,8 @@ const styles = StyleSheet.create({
     width: "100%",
     backgroundColor: "#dde2d3",
     borderRadius: 25,
-    paddingHorizontal: 15,
-    paddingVertical: 12,
+    paddingHorizontal: 10,
+    paddingVertical: 8,
     marginBottom: 15,
     flexDirection: "row",
     alignItems: "center",
@@ -174,17 +170,17 @@ const styles = StyleSheet.create({
   },
 
   iconWrapper: {
-  width: 50,
-  height: 50,
-  borderRadius: 50,
-  backgroundColor: "#faffec",
-  justifyContent: "center",
-  alignItems: "center",
-  shadowColor: "#000",
-  shadowOffset: { width: 0, height: 2 },
-  shadowOpacity: 0.1,
-  shadowRadius: 3,
-  elevation: 2,
+    width: 30,
+    height: 30,
+    borderRadius: 50,
+    backgroundColor: "#faffec",
+    justifyContent: "center",
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 3,
+    elevation: 2,
   },
 
   options: {
@@ -196,23 +192,22 @@ const styles = StyleSheet.create({
   },
 
   rememberText: {
-    fontSize: 15,
+    fontSize: 13,
     color: "#444",
     fontFamily: 'AvenirNext-Regular',
   },
 
-  link: {
-    fontSize: 15,
-    color: "#648855",
-    fontWeight: "500",
+  forgotPasswordLink: {
     fontFamily: 'AvenirNext-Regular',
+    fontSize: 13,
+    color: "#3e6a30",
   },
 
   loginBtn: {
     marginTop: 15,
     width: "100%",
     backgroundColor: "#3e6a30",
-    paddingVertical: 14,
+    paddingVertical: 10,
     borderRadius: 30,
     alignItems: "center",
     marginBottom: 20,
@@ -254,6 +249,14 @@ const styles = StyleSheet.create({
     shadowRadius: 5,
   },
 
+  socialText: {
+    fontFamily: 'AvenirNext-Medium',
+    fontSize: 18,
+    fontWeight: "bold",
+    marginLeft: 5,
+    color: '#3e6a30',
+  },
+
   footer: {
     fontFamily: 'AvenirNext-Regular',
     fontSize: 15,
@@ -264,7 +267,7 @@ const styles = StyleSheet.create({
   link: {
     fontFamily: 'AvenirNext-Medium',
     fontSize: 15,
-    color: "#648855",
+    color: "#3e6a30",
     fontWeight: "500",
   },
 });

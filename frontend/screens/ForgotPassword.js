@@ -1,4 +1,3 @@
-// screens/ForgotPasswordScreen.js
 import React, { useState } from "react";
 import {
   StyleSheet,
@@ -15,7 +14,6 @@ export default function ForgotPasswordScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
-      {/* Back Button */}
       <TouchableOpacity
         style={styles.backBtn}
         onPress={() => navigation.navigate("Login")}
@@ -28,7 +26,6 @@ export default function ForgotPasswordScreen({ navigation }) {
         Don’t worry! Just enter your email and we’ll send you a reset link.
       </Text>
 
-      {/* Email */}
       <View style={styles.inputContainer}>
         <TextInput
           placeholder="Email"
@@ -38,11 +35,10 @@ export default function ForgotPasswordScreen({ navigation }) {
           onChangeText={setEmail}
         />
         <View style={styles.iconWrapper}>
-          <Ionicons name="mail-outline" size={22} color="#555" />
+          <Ionicons name="mail-outline" size={20} color="#555" />
         </View>
       </View>
 
-      {/* Reset Button */}
       <Button
         mode="contained"
         style={styles.resetBtn}
@@ -51,7 +47,6 @@ export default function ForgotPasswordScreen({ navigation }) {
         Send Reset Link
       </Button>
 
-      {/* Back to Login */}
       <Text style={styles.footer}>
         Remembered your password?{" "}
         <Text style={styles.link} onPress={() => navigation.navigate("Login")}>
@@ -65,7 +60,7 @@ export default function ForgotPasswordScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#eef2e6",
+    backgroundColor: "#e8eddf",
     alignItems: "center",
     justifyContent: "center",
     padding: 40,
@@ -79,12 +74,11 @@ const styles = StyleSheet.create({
   },
 
   title: {
-    fontSize: 40,
+    fontSize: 30,
     fontFamily: "AvenirNext-Bold",
     fontWeight: "bold",
-    color: "#2d4a22",
+    color: "#3e6a30",
     marginBottom: 20,
-    marginRight: "auto",
   },
 
   subtitle: {
@@ -98,7 +92,7 @@ const styles = StyleSheet.create({
 
   inputContainer: {
     width: "100%",
-    backgroundColor: "#e3e8da",
+    backgroundColor: "#dde2d3",
     borderRadius: 25,
     paddingHorizontal: 15,
     paddingVertical: 12,
@@ -114,10 +108,10 @@ const styles = StyleSheet.create({
   },
 
   iconWrapper: {
-    width: 50,
-    height: 50,
+    width: 40,
+    height: 40,
     borderRadius: 50,
-    backgroundColor: "#fff",
+    backgroundColor: "#faffec",
     justifyContent: "center",
     alignItems: "center",
     shadowColor: "#000",
@@ -130,8 +124,8 @@ const styles = StyleSheet.create({
   resetBtn: {
     marginTop: 20,
     width: "100%",
-    backgroundColor: "#2d6a4f",
-    paddingVertical: 13,
+    backgroundColor: "#3e6a30",
+    paddingVertical: 5,
     borderRadius: 30,
     alignItems: "center",
     marginBottom: 20,
@@ -146,14 +140,14 @@ const styles = StyleSheet.create({
 
   footer: {
     fontFamily: "AvenirNext-Regular",
-    fontSize: 15,
+    fontSize: 14,
     marginTop: 10,
   },
 
   link: {
     fontFamily: "AvenirNext-Medium",
-    fontSize: 15,
-    color: "#2d6a4f",
+    fontSize: 14,
+    color: "#3e6a30",
     fontWeight: "500",
   },
 });

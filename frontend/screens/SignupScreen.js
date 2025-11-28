@@ -1,4 +1,3 @@
-// screens/SignupScreen.js
 import React, { useState } from "react";
 import {
   StyleSheet,
@@ -37,7 +36,6 @@ export default function SignupScreen({ navigation }) {
         Create your account and start your journey with us 🌱
       </Text>
 
-      {/* Name */}
       <View style={styles.inputContainer}>
         <TextInput
           placeholder="Full Name"
@@ -46,11 +44,10 @@ export default function SignupScreen({ navigation }) {
           onChangeText={setName}
         />
         <View style={styles.iconWrapper}>
-          <Ionicons name="person-outline" size={30} color="#20340a" style={styles.icon} />
+          <Ionicons name="person-outline" size={20} color="#20340a" style={styles.icon} />
         </View>
       </View>
 
-      {/* Email */}
       <View style={styles.inputContainer}>
         <TextInput
           placeholder="Email"
@@ -59,11 +56,10 @@ export default function SignupScreen({ navigation }) {
           onChangeText={setEmail}
         />
         <View style={styles.iconWrapper}>
-          <Ionicons name="mail-outline" size={30} color="#20340a" style={styles.icon} />
+          <Ionicons name="mail-outline" size={20} color="#20340a" style={styles.icon} />
         </View>
       </View>
 
-      {/* Password */}
       <View style={styles.inputContainer}>
         <TextInput
           placeholder="Password"
@@ -79,14 +75,13 @@ export default function SignupScreen({ navigation }) {
         <View style={styles.iconWrapper}>
           <Ionicons
             name={showPassword ? "eye-off-outline" : "eye-outline"}
-            size={30}
+            size={20}
             color="#20340a"
           />
         </View>
         </TouchableOpacity>
       </View>
 
-      {/* Confirm Password */}
       <View style={styles.inputContainer}>
         <TextInput
           placeholder="Confirm Password"
@@ -102,33 +97,30 @@ export default function SignupScreen({ navigation }) {
         <View style={styles.iconWrapper}>
           <Ionicons
             name={showConfirmPassword ? "eye-off-outline" : "eye-outline"}
-            size={30}
+            size={20}
             color="#20340a"
           />
         </View>
         </TouchableOpacity>
       </View>
 
-      {/* Sign Up */}
       <TouchableOpacity style={styles.signupBtn} onPress={handleSignup}>
         <Text style={styles.signupText}>Sign Up</Text>
       </TouchableOpacity>
       <Text style={styles.divider}>Or</Text>
 
-      {/* Social */}
       <View style={styles.socialContainer}>
         <TouchableOpacity style={styles.socialBtn}>
-          <AntDesign name="google" size={30} color="#516B22" />
+          <AntDesign name="google" size={20} color="#516B22" />
           <Text style={styles.socialText}> Google</Text>
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.socialBtn}>
-          <AntDesign name="apple" size={30} color="#516B22" />
+          <AntDesign name="apple" size={20} color="#516B22" />
           <Text style={styles.socialText}> Apple</Text>
         </TouchableOpacity>
       </View>
 
-      {/* Footer */}
       <Text style={styles.footer}>
         Already have an account?{" "}
         <Text
@@ -145,66 +137,65 @@ export default function SignupScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#eef2e6",
+    backgroundColor: "#e8eddf",
     alignItems: "center",
     justifyContent: "center",
     padding: 40,
   },
 
   title: {
-    fontSize: 40,
+    fontSize: 30,
     fontFamily: 'AvenirNext-Bold',
     fontWeight: "bold",
-    color: "#2d4a22",
-    marginBottom: 20,
-    marginRight: 'auto',
+    color: "#3e6a30",
+    marginBottom: 10,
   },
 
   subtitle: {
     fontFamily: 'AvenirNext-Medium',
-    fontSize: 16,
+    fontSize: 15,
     color: "#555",
     textAlign: "center",
-    marginBottom: 25,
+    marginBottom: 20,
     lineHeight: 20,
   },
 
   inputContainer: {
     width: "100%",
-    backgroundColor: "#e3e8da",
-    borderRadius: 25,
-    paddingHorizontal: 15,
-    paddingVertical: 12,
-    marginBottom: 15,
+    backgroundColor: "#dde2d3",
+    borderRadius: 50,
+    paddingHorizontal: 13,
+    paddingVertical: 10,
+    marginBottom: 10,
     flexDirection: "row",
     alignItems: "center",
   },
 
   input: {
     flex: 1,
-    fontSize: 14,
+    fontSize: 13,
     fontFamily: 'AvenirNext-Regular',
     color: '#333',
   },
 
   iconWrapper: {
-  width: 50,
-  height: 50,
-  borderRadius: 50,
-  backgroundColor: "#fff",
-  justifyContent: "center",
-  alignItems: "center",
-  shadowColor: "#000",
-  shadowOffset: { width: 0, height: 2 },
-  shadowOpacity: 0.1,
-  shadowRadius: 3,
-  elevation: 2,
+    width: 30,
+    height: 30,
+    borderRadius: 50,
+    backgroundColor: "#faffec",
+    justifyContent: "center",
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 3,
+    elevation: 2,
   },
 
   signupBtn: {
     width: "100%",
-    backgroundColor: "#2d6a4f",
-    paddingVertical: 14,
+    backgroundColor: "#3e6a30",
+    paddingVertical: 10,
     borderRadius: 30,
     alignItems: "center",
     marginBottom: 20,
@@ -238,7 +229,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     paddingVertical: 12,
     borderRadius: 30,
-    backgroundColor: "#fff",
+    backgroundColor: "#f3f7ec",
     marginHorizontal: 5,
     elevation: 2,
     shadowColor: "#000",
@@ -251,7 +242,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
     marginLeft: 5,
-    color: '#20340a',
+    color: '#3e6a30',
   },
 
   footer: {
@@ -263,7 +254,7 @@ const styles = StyleSheet.create({
   link: {
     fontFamily: 'AvenirNext-Medium',
     fontSize: 15,
-    color: "#2d6a4f",
+    color: "#3e6a30",
     fontWeight: "500",
   },
 });
