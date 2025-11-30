@@ -1,27 +1,27 @@
 export const plants = [
   // Indoor Plants (10)
-  { id: "1", name: "Snake Plant", category: "Indoor", price: "$12", image: "/Users/sai/Desktop/florasense/assets/snakeplant.png" },
-  { id: "2", name: "ZZ Plant", category: "Indoor", price: "$18", image: "/Users/sai/Desktop/florasense/assets/zzplant.png" },
-  { id: "3", name: "Fiddle Leaf Fig", category: "Indoor", price: "$25", image: "/Users/sai/Desktop/florasense/assets/fiddleleaffigplant.png" },
-  { id: "4", name: "Peace Lily", category: "Indoor", price: "$15", image: "/Users/sai/Desktop/florasense/assets/peacelily.png" },
-  { id: "5", name: "Pothos", category: "Indoor", price: "$10", image: "/Users/sai/Desktop/florasense/assets/pothosplant.png" },
-  { id: "6", name: "Rubber Plant", category: "Indoor", price: "$20", image: "/Users/sai/Desktop/florasense/assets/rubberplant.png" },
-  { id: "7", name: "Dracaena", category: "Indoor", price: "$14", image: "/Users/sai/Desktop/florasense/assets/dracaena.png" },
-  { id: "8", name: "Parlor Palm", category: "Indoor", price: "$22", image: "/Users/sai/Desktop/florasense/assets/parlorpalm.png" },
-  { id: "9", name: "Monstera Deliciosa", category: "Indoor", price: "$20", image: "/Users/sai/Desktop/florasense/assets/monsteradeliciosa.png" },
-  { id: "10", name: "Bird’s Nest Fern", category: "Indoor", price: "$18", image: "/Users/sai/Desktop/florasense/assets/birdsnestfern.png" },
+  { id: "1", name: "Snake Plant", category: "Indoor", price: "$12", image: require("../assets/snakeplant.png") },
+  { id: "2", name: "ZZ Plant", category: "Indoor", price: "$18", image: require("../assets/zzplant.png") },
+  { id: "3", name: "Fiddle Leaf Fig", category: "Indoor", price: "$25", image: require("../assets/fiddleleaffigplant.png") },
+  { id: "4", name: "Peace Lily", category: "Indoor", price: "$15", image: require("../assets/peacelily.png") },
+  { id: "5", name: "Pothos", category: "Indoor", price: "$10", image: require("../assets/pothosplant.png") },
+  { id: "6", name: "Rubber Plant", category: "Indoor", price: "$20", image: require("../assets/rubberplant.png") },
+  { id: "7", name: "Dracaena", category: "Indoor", price: "$14", image: require("../assets/dracaena.png") },
+  { id: "8", name: "Parlor Palm", category: "Indoor", price: "$22", image: require("../assets/parlorpalm.png") },
+  { id: "9", name: "Monstera Deliciosa", category: "Indoor", price: "$20", image: require("../assets/monsteradeliciosa.png") },
+  { id: "10", name: "Bird’s Nest Fern", category: "Indoor", price: "$18", image: require("../assets/birdsnestfern.png") },
 
   // Outdoor Plants (10)
-  { id: "21", name: "Rose", category: "Outdoor", price: "$8", image: "/Users/sai/Desktop/florasense/assets/rose.png" },
-  { id: "22", name: "Lavender", category: "Outdoor", price: "$7", image: "/Users/sai/Desktop/florasense/assets/lavender.png" },
-  { id: "23", name: "Jasmine", category: "Outdoor", price: "$12", image: "/Users/sai/Desktop/florasense/assets/jasmine.png" },
-  { id: "24", name: "Sunflower", category: "Outdoor", price: "$6", image: "/Users/sai/Desktop/florasense/assets/sunflower.png" },
-  { id: "25", name: "Tulip", category: "Outdoor", price: "$8", image: "/Users/sai/Desktop/florasense/assets/tulip.png" },
-  { id: "26", name: "Camellia", category: "Outdoor", price: "$14", image: "/Users/sai/Desktop/florasense/assets/camellia.png" },
-  { id: "27", name: "Magnolia", category: "Outdoor", price: "$20", image: "/Users/sai/Desktop/florasense/assets/magnolia.png" },
-  { id: "28", name: "Chrysanthemum", category: "Outdoor", price: "$8", image: "/Users/sai/Desktop/florasense/assets/chrysanthemum.png" },
-  { id: "29", name: "Gladiolus", category: "Outdoor", price: "$9", image: "/Users/sai/Desktop/florasense/assets/gladiolus.png" },
-  { id: "30", name: "Oleander", category: "Outdoor", price: "$11", image: "/Users/sai/Desktop/florasense/assets/oleander.png" },
+  { id: "21", name: "Rose", category: "Outdoor", price: "$8", image: require("../assets/rose.png") },
+  { id: "22", name: "Lavender", category: "Outdoor", price: "$7", image: require("../assets/lavender.png") },
+  { id: "23", name: "Jasmine", category: "Outdoor", price: "$12", image: require("../assets/jasmine.png") },
+  { id: "24", name: "Sunflower", category: "Outdoor", price: "$6", image: require("../assets/sunflower.png") },
+  { id: "25", name: "Tulip", category: "Outdoor", price: "$8", image: require("../assets/tulip.png") },
+  { id: "26", name: "Camellia", category: "Outdoor", price: "$14", image: require("../assets/camellia.png") },
+  { id: "27", name: "Magnolia", category: "Outdoor", price: "$20", image: require("../assets/magnolia.png") },
+  { id: "28", name: "Chrysanthemum", category: "Outdoor", price: "$8", image: require("../assets/chrysanthemum.png") },
+  { id: "29", name: "Gladiolus", category: "Outdoor", price: "$9", image: require("../assets/gladiolus.png") },
+  { id: "30", name: "Oleander", category: "Outdoor", price: "$11", image: require("../assets/oleander.png") },
 
   // Succulents (10)
   { id: "41", name: "Aloe Vera", category: "Succulents", price: "$7", image: "https://i.imgur.com/8v7PSOy.png" },
@@ -31,9 +31,9 @@ export const plants = [
   { id: "45", name: "Lithops (Living Stones)", category: "Succulents", price: "$7", image: "https://i.imgur.com/6lPz5yZ.png" },
   { id: "46", name: "Agave", category: "Succulents", price: "$10", image: "https://i.imgur.com/2fB8Kcz.png" },
   { id: "47", name: "Kalanchoe", category: "Succulents", price: "$9", image: "https://i.imgur.com/3sUJc8k.png" },
-  { id: "48", name: "Sempervivum (Hens & Chicks)", category: "Succulents", price: "$6", image: "https://i.imgur.com/kLzGfE4.png" },
+  { id: "48", name: "Sempervivum", category: "Succulents", price: "$6", image: "https://i.imgur.com/kLzGfE4.png" },
   { id: "49", name: "Gasteria", category: "Succulents", price: "$8", image: "https://i.imgur.com/rDdxwMv.png" },
-  { id: "50", name: "Euphorbia Trigona (African Milk Tree)", category: "Succulents", price: "$12", image: "https://i.imgur.com/c4O4a9A.png" },
+  { id: "50", name: "Euphorbia Trigona", category: "Succulents", price: "$12", image: "https://i.imgur.com/c4O4a9A.png" },
 
   // Flowering Plants (10)
   { id: "61", name: "Bougainvillea", category: "Flowering", price: "$10", image: "https://i.imgur.com/8nKp3Bf.png" },
@@ -59,15 +59,15 @@ export const plants = [
   { id: "89", name: "Sage", category: "Herbs", price: "$6", image: "https://i.imgur.com/HRaZQqJ.png" },
   { id: "90", name: "Lemongrass", category: "Herbs", price: "$6", image: "https://i.imgur.com/vBww7Eo.png" },
 
-  // Air Purifier Plants (10+)
+  // Air Purifier Plants (10)
   { id: "101", name: "Aloe Vera", category: "AirPurifiers", price: "$7", image: "https://i.imgur.com/8v7PSOy.png" },
-  { id: "102", name: "Spider Plant", category: "AirPurifiers", price: "$10", image: "/Users/sai/Desktop/florasense/assets/spiderplant.png" },
+  { id: "102", name: "Spider Plant", category: "AirPurifiers", price: "$10", image: require("../assets/spiderplant.png") },
   { id: "103", name: "Areca Palm", category: "AirPurifiers", price: "$23", image: "https://i.imgur.com/n2MzrO3.png" },
   { id: "104", name: "Boston Fern", category: "AirPurifiers", price: "$11", image: "https://i.imgur.com/XH3kquD.png" },
   { id: "105", name: "Peace Lily", category: "AirPurifiers", price: "$15", image: "https://i.imgur.com/jV1S8bC.png" },
   { id: "106", name: "Bamboo Palm", category: "AirPurifiers", price: "$20", image: "https://i.imgur.com/CrzvA3k.png" },
   { id: "107", name: "Rubber Plant", category: "AirPurifiers", price: "$20", image: "https://i.imgur.com/9K1dZLh.png" },
-  { id: "108", name: "Dracaena", category: "AirPurifiers", price: "$14", image: "/Users/sai/Desktop/florasense/assets/dracaena.png" },
+  { id: "108", name: "Dracaena", category: "AirPurifiers", price: "$14", image: require("../assets/dracaena.png") },
   { id: "109", name: "Weeping Fig", category: "AirPurifiers", price: "$18", image: "https://i.imgur.com/RkE3aJv.png" },
   { id: "110", name: "Chrysanthemum", category: "AirPurifiers", price: "$8", image: "https://i.imgur.com/h8tVj4d.png" },
 ];

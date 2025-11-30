@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import {
   View,
   Text,
@@ -8,14 +8,76 @@ import {
   TouchableOpacity,
   StyleSheet,
 } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Ionicons } from "@expo/vector-icons";
+import { plants } from "../../data/plant";
+
+const PlantCard = React.memo(({ item, isFav, toggleFavorite, navigation }) => (
+  <View style={styles.card}>
+    <TouchableOpacity
+      style={styles.heartBtn}
+      onPress={() => toggleFavorite(item)}
+    >
+      <Ionicons name={isFav ? "heart" : "heart-outline"} size={20} color="white" />
+    </TouchableOpacity>
+
+    <Image
+      source={typeof item.image === "string" ? { uri: item.image } : item.image}
+      style={styles.plantImage}
+      resizeMode="contain"
+    />
+
+    <View style={styles.cardFooter}>
+      <View>
+        <Text style={styles.plantName}>{item.name}</Text>
+        <Text style={styles.price}>{item.price}</Text>
+      </View>
+
+      <TouchableOpacity
+        style={styles.arrowBtn}
+        onPress={() => navigation.navigate("Details", { plant: item })}
+      >
+        <Ionicons name="arrow-forward" size={20} color="white" />
+      </TouchableOpacity>
+    </View>
+  </View>
+));
 
 export default function HomeScreen({ navigation }) {
-  const [plants, setPlants] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState("All");
   const [activeNav, setActiveNav] = useState("home");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const [favorites, setFavorites] = useState([]);
+  const [cart, setCart] = useState([]);
+
+  useEffect(() => {
+    loadData();
+  }, []);
+
+  const loadData = async () => {
+    const fav = await AsyncStorage.getItem("favorites");
+    const crt = await AsyncStorage.getItem("cart");
+
+    if (fav) setFavorites(JSON.parse(fav));
+    if (crt) setCart(JSON.parse(crt));
+  };
+
+  const toggleFavorite = useCallback(
+    async (plant) => {
+      let updatedFavs;
+
+      if (favorites.some((f) => f.id === plant.id)) {
+        updatedFavs = favorites.filter((f) => f.id !== plant.id);
+      } else {
+        updatedFavs = [...favorites, plant];
+      }
+
+      setFavorites(updatedFavs);
+      await AsyncStorage.setItem("favorites", JSON.stringify(updatedFavs));
+    },
+    [favorites]
+  );
 
   const categories = [
     "All",
@@ -27,99 +89,37 @@ export default function HomeScreen({ navigation }) {
     "AirPurifiers",
   ];
 
-  useEffect(() => {
-    fetch("http://localhost:5001/api/plants") // change to IP if using real device
-      .then((res) => res.json())
-      .then((data) => {
-        console.log("API Plants:", data.data);
-        setPlants(data.data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.log("API ERROR:", err);
-        setLoading(false);
-      });
-  }, []);
-
-  // Filter plants based on category (fallback)
   const filteredPlants =
-    activeTab === "All"
-      ? plants
-      : plants.filter((p) =>
-          (p.type || "").toLowerCase().includes(activeTab.toLowerCase())
-        );
+    activeTab === "All" ? plants : plants.filter((p) => p.category === activeTab);
 
-  // -------------------------
-  // Render each plant card
-  // -------------------------
-  const renderPlantCard = ({ item }) => (
-    <View style={styles.card}>
-      {/* Heart Button */}
-      <TouchableOpacity style={styles.heartBtn}>
-        <Ionicons name="heart-outline" size={20} color="white" />
-      </TouchableOpacity>
-
-      {/* Plant Image */}
-      <Image
-        source={{
-          uri:
-            item.default_image?.original_url ||
-            "https://via.placeholder.com/200",
-        }}
-        style={styles.plantImage}
-      />
-
-      <View style={styles.cardFooter}>
-        <View>
-          <Text style={styles.plantName}>
-            {item.common_name || "Unknown Plant"}
-          </Text>
-
-          <Text style={styles.price}>
-            ${item.price || "19.99"} {/* Dummy price */}
-          </Text>
-        </View>
-
-        <TouchableOpacity
-          style={styles.arrowBtn}
-          onPress={() => navigation.navigate("Details", { plant: item })}
-        >
-          <Ionicons name="arrow-forward" size={22} color="white" />
-        </TouchableOpacity>
-      </View>
-    </View>
+  const renderPlantCard = useCallback(
+    ({ item }) => {
+      const isFav = favorites.some((f) => f.id === item.id);
+      return (
+        <PlantCard
+          item={item}
+          isFav={isFav}
+          toggleFavorite={toggleFavorite}
+          navigation={navigation}
+        />
+      );
+    },
+    [favorites]
   );
 
-  // -------------------------
-  // Loading Screen
-  // -------------------------
-  if (loading) {
-    return (
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <Text style={{ fontSize: 20, fontWeight: "bold" }}>
-          Loading plants...
-        </Text>
-      </View>
-    );
-  }
-
-  // -------------------------
-  // MAIN UI
-  // -------------------------
   return (
     <View style={styles.container}>
       {/* HEADER */}
-      {activeNav === "home" && (
-        <View style={styles.header}>
-          <Text style={styles.title}>
-            Find Your{"\n"}
-            <Text style={styles.highlight}>Favorite Plants</Text>
-          </Text>
-          <TouchableOpacity style={styles.searchBtn}>
-            <Ionicons name="search" size={20} color="#1B4332" />
-          </TouchableOpacity>
-        </View>
-      )}
+      <View style={styles.header}>
+        <Text style={styles.title}>
+          Find Your{"\n"}
+          <Text style={styles.highlight}>Favorite Plants</Text>
+        </Text>
+
+        <TouchableOpacity style={styles.searchBtn}>
+          <Ionicons name="search" size={20} color="#1B4332" />
+        </TouchableOpacity>
+      </View>
 
       {/* TABS */}
       {activeNav === "home" && (
@@ -136,7 +136,10 @@ export default function HomeScreen({ navigation }) {
                 onPress={() => setActiveTab(tab)}
               >
                 <Text
-                  style={[styles.tabText, activeTab === tab && styles.tabTextActive]}
+                  style={[
+                    styles.tabText,
+                    activeTab === tab && styles.tabTextActive,
+                  ]}
                 >
                   {tab}
                 </Text>
@@ -146,37 +149,63 @@ export default function HomeScreen({ navigation }) {
         </View>
       )}
 
-      {/* PLANT LIST */}
+      {/* HOME LIST */}
       {activeNav === "home" && (
         <FlatList
           data={filteredPlants}
-          keyExtractor={(item) => item.id.toString()}
+          keyExtractor={(item) => item.id}
           renderItem={renderPlantCard}
           showsVerticalScrollIndicator={false}
+          initialNumToRender={8}
+          maxToRenderPerBatch={5}
+          windowSize={5}
+          removeClippedSubviews={true}
           contentContainerStyle={{ paddingBottom: 80, paddingHorizontal: 20 }}
         />
       )}
 
-      {/* OTHER SCREENS */}
+      {/* ❤️ FAVOURITES */}
       {activeNav === "heart" && (
         <View style={styles.screenCenter}>
-          <Text style={styles.screenText}>❤️ Favorites Screen</Text>
+          <Text style={styles.screenTitle}>❤️ Favourites</Text>
+
+          {favorites.length === 0 ? (
+            <Text>No favourites yet</Text>
+          ) : (
+            favorites.map((item) => (
+              <Text key={item.id} style={{ marginTop: 10 }}>
+                • {item.name}
+              </Text>
+            ))
+          )}
         </View>
       )}
 
+      {/* 🛒 CART */}
       {activeNav === "cart" && (
         <View style={styles.screenCenter}>
-          <Text style={styles.screenText}>🛒 Cart Screen</Text>
+          <Text style={styles.screenTitle}>🛒 Cart</Text>
+
+          {cart.length === 0 ? (
+            <Text>No items in cart</Text>
+          ) : (
+            cart.map((item) => (
+              <Text key={item.id} style={{ marginTop: 10 }}>
+                • {item.name}
+              </Text>
+            ))
+          )}
         </View>
       )}
 
+      {/* PROFILE */}
       {activeNav === "person" && isLoggedIn && (
         <View style={styles.screenCenter}>
-          <Text style={styles.screenText}>👤 Profile Screen</Text>
+          <Text style={styles.screenTitle}>👤 Profile</Text>
         </View>
       )}
 
-      {/* BOTTOM NAV */}
+      {/* NAVIGATION BAR */}
       <View style={styles.bottomArea}>
         <View style={styles.navContainer}>
           {[
@@ -188,7 +217,15 @@ export default function HomeScreen({ navigation }) {
             <TouchableOpacity
               key={nav.key}
               style={[styles.navItem, activeNav === nav.key && styles.activeNavItem]}
-              onPress={() => setActiveNav(nav.key)}
+              onPress={() => {
+                if (nav.key === "person") {
+                  isLoggedIn
+                    ? navigation.navigate("Account")
+                    : navigation.navigate("Login");
+                } else {
+                  setActiveNav(nav.key);
+                }
+              }}
             >
               <Ionicons
                 name={nav.icon}
@@ -204,16 +241,29 @@ export default function HomeScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: "#F0F5EC", paddingTop: 30 },
+  container: { flex: 1, backgroundColor: "#F0F5EC", paddingTop: 30, padding: 10 },
 
   header: {
     flexDirection: "row",
     justifyContent: "space-between",
+    alignItems: "flex-start",
     paddingHorizontal: 20,
   },
 
-  title: { fontSize: 15, marginTop: 30, color: "#333" },
-  highlight: { fontSize: 25, fontWeight: "bold", color: "#1B4332" },
+  title: {
+    fontSize: 15,
+    marginTop: 30,
+    color: "#333",
+    fontWeight: "400",
+    fontFamily: "AvenirNext-Medium",
+  },
+
+  highlight: {
+    fontSize: 25,
+    fontWeight: "bold",
+    color: "#1B4332",
+    fontFamily: "AvenirNext-Bold",
+  },
 
   searchBtn: {
     backgroundColor: "#DDEEDC",
@@ -228,24 +278,35 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     borderRadius: 50,
     marginRight: 10,
+    marginBottom: 10,
   },
+
   tabActive: { backgroundColor: "#1B4332" },
-  tabText: { fontSize: 15, color: "#333" },
+
+  tabText: {
+    fontSize: 15,
+    color: "#333",
+    fontFamily: "AvenirNext-Medium",
+  },
+
   tabTextActive: { color: "#fff" },
 
-  tabsContainer: { marginTop: 10 },
+  tabsContainer: { marginTop: 10, marginBottom: 5 },
 
   card: {
     backgroundColor: "#DDEEDC",
     borderRadius: 25,
     padding: 5,
     marginBottom: 30,
+    width: "100%",
+    alignSelf: "center",
   },
 
   plantImage: {
     width: "100%",
     height: 250,
     marginBottom: 20,
+    resizeMode: "contain",
   },
 
   heartBtn: {
@@ -268,13 +329,17 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     fontWeight: "600",
     color: "#1B4332",
+    fontFamily: "AvenirNext-Medium",
   },
 
   price: {
     fontSize: 15,
     marginLeft: 20,
+    marginBottom: 5,
     fontWeight: "bold",
     color: "#1B4332",
+    marginTop: 4,
+    fontFamily: "AvenirNext-Bold",
   },
 
   arrowBtn: {
@@ -282,9 +347,8 @@ const styles = StyleSheet.create({
     height: 40,
     borderRadius: 20,
     backgroundColor: "#1B4332",
-    justifyContent: "center",
     alignItems: "center",
-    marginRight: 20,
+    justifyContent: "center",
   },
 
   bottomArea: {
@@ -304,8 +368,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
     backgroundColor: "#1B4332",
-    padding: 10,
     borderRadius: 40,
+    padding: 10,
   },
 
   navItem: {
@@ -318,14 +382,23 @@ const styles = StyleSheet.create({
 
   activeNavItem: {
     backgroundColor: "#fff",
-  },
-
-  screenCenter: {
-    flex: 1,
+    width: 45,
+    height: 45,
+    borderRadius: 25,
     justifyContent: "center",
     alignItems: "center",
   },
 
-  screenText: { fontSize: 22, fontWeight: "bold" },
-});
+  screenCenter: {
+    flex: 1,
+    alignItems: "center",
+    marginTop: 50,
+  },
 
+  screenTitle: {
+    fontSize: 24,
+    fontWeight: "bold",
+    color: "#1B4332",
+    marginBottom: 20,
+  },
+});

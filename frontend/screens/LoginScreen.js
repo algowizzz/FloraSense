@@ -26,7 +26,6 @@ export default function LoginScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
-      {/* Back Button */}
       <TouchableOpacity
         style={styles.backBtn}
         onPress={() => navigation.navigate("Home")}
@@ -39,7 +38,6 @@ export default function LoginScreen({ navigation }) {
         It’s time to return to the soil! Log in to your account and keep growing. 🌱
       </Text>
 
-      {/* Email Input */}
       <View style={styles.inputContainer}>
         <TextInput
           placeholder="Email"
@@ -52,7 +50,6 @@ export default function LoginScreen({ navigation }) {
         </View>
       </View>
 
-      {/* Password Input */}
       <View style={styles.inputContainer}>
         <TextInput
           placeholder="Password"
