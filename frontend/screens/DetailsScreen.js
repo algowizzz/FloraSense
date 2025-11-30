@@ -11,7 +11,7 @@ import { Ionicons } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const DetailsScreen = ({ navigation, route }) => {
-  const plant = route.params.plant; // 🌱 Get clicked plant
+  const plant = route.params.plant;
 
   const [isFavourite, setIsFavourite] = useState(false);
 
@@ -56,7 +56,6 @@ const DetailsScreen = ({ navigation, route }) => {
 
   return (
     <ScrollView style={styles.container}>
-      {/* HEADER */}
       <View style={styles.header}>
         <TouchableOpacity
           style={styles.circleButton}
@@ -76,7 +75,6 @@ const DetailsScreen = ({ navigation, route }) => {
         </TouchableOpacity>
       </View>
 
-      {/* IMAGE */}
       <View style={styles.imageContainer}>
         <Image
           source={{ uri: plant.image }}
@@ -85,16 +83,13 @@ const DetailsScreen = ({ navigation, route }) => {
         />
       </View>
 
-      {/* TITLE */}
       <View style={styles.titleContainer}>
         <Text style={styles.plantName}>{plant.name}</Text>
         <Text style={styles.price}>{plant.price}</Text>
       </View>
 
-      {/* RATING */}
       <Text style={styles.rating}>⭐ 4.9 (122 reviews)</Text>
 
-      {/* DESCRIPTION */}
       <Text style={styles.description}>
         {plant.description
           ? plant.description
@@ -102,7 +97,6 @@ const DetailsScreen = ({ navigation, route }) => {
         <Text style={styles.readMore}> Read More</Text>
       </Text>
 
-      {/* INFO */}
       <Text style={styles.sectionTitle}>Plant Information</Text>
 
       <View style={styles.infoContainer}>
@@ -122,7 +116,6 @@ const DetailsScreen = ({ navigation, route }) => {
         </View>
       </View>
 
-      {/* CART BUTTON */}
       <TouchableOpacity style={styles.cartButton} onPress={addToCart}>
         <Text style={styles.cartText}>Add To Cart</Text>
       </TouchableOpacity>
@@ -130,7 +123,6 @@ const DetailsScreen = ({ navigation, route }) => {
   );
 };
 
-// ✔ SAME STYLES AS YOUR CODE (unchanged)
 const styles = StyleSheet.create({
   container: {
     flex: 1,

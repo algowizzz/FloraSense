@@ -12,9 +12,6 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Ionicons } from "@expo/vector-icons";
 import { plants } from "../../data/plant";
 
-/* ---------------------------------------------------
-                 PLANT CARD (HOME)
---------------------------------------------------- */
 const PlantCard = React.memo(({ item, isFav, toggleFavorite, navigation }) => (
   <View style={styles.card}>
     <TouchableOpacity
@@ -46,10 +43,6 @@ const PlantCard = React.memo(({ item, isFav, toggleFavorite, navigation }) => (
   </View>
 ));
 
-
-/* ---------------------------------------------------
-              FAVOURITE CARD (FULL VIEW)
---------------------------------------------------- */
 const FavCard = React.memo(({ item, removeFav }) => (
   <View style={styles.card}>
     <TouchableOpacity style={styles.heartBtn} onPress={() => removeFav(item)}>
@@ -71,10 +64,6 @@ const FavCard = React.memo(({ item, removeFav }) => (
   </View>
 ));
 
-
-/* ---------------------------------------------------
-                 CART CARD WITH QUANTITY
---------------------------------------------------- */
 const CartCard = React.memo(({ item, updateQty, removeCart }) => (
   <View style={styles.card}>
     <TouchableOpacity style={styles.heartBtn} onPress={() => removeCart(item)}>
@@ -92,7 +81,6 @@ const CartCard = React.memo(({ item, updateQty, removeCart }) => (
         <Text style={styles.plantName}>{item.name}</Text>
         <Text style={styles.price}>{item.price}</Text>
 
-        {/* Quantity Controls */}
         <View style={{ flexDirection: "row", alignItems: "center", marginTop: 10 }}>
           <TouchableOpacity
             onPress={() => updateQty(item, "dec")}
@@ -117,11 +105,6 @@ const CartCard = React.memo(({ item, updateQty, removeCart }) => (
   </View>
 ));
 
-
-/* ---------------------------------------------------
-                     MAIN SCREEN
---------------------------------------------------- */
-
 export default function HomeScreen({ navigation }) {
   const [activeTab, setActiveTab] = useState("All");
   const [activeNav, setActiveNav] = useState("home");
@@ -142,7 +125,6 @@ export default function HomeScreen({ navigation }) {
     if (crt) setCart(JSON.parse(crt));
   };
 
-  /* -------------------- FAVOURITES -------------------- */
   const toggleFavorite = async (plant) => {
     let updated;
 
@@ -162,7 +144,6 @@ export default function HomeScreen({ navigation }) {
     await AsyncStorage.setItem("favorites", JSON.stringify(updated));
   };
 
-  /* -------------------- CART LOGIC -------------------- */
   const addToCart = async (plant) => {
     let updated = [...cart];
 
@@ -197,15 +178,12 @@ export default function HomeScreen({ navigation }) {
     await AsyncStorage.setItem("cart", JSON.stringify(updated));
   };
 
-  /* -------------------- FILTER -------------------- */
-
   const filteredPlants =
     activeTab === "All" ? plants : plants.filter((p) => p.category === activeTab);
 
 
   return (
     <View style={styles.container}>
-      {/* HEADER */}
       <View style={styles.header}>
         <Text style={styles.title}>
           Find Your {"\n"}
@@ -217,7 +195,6 @@ export default function HomeScreen({ navigation }) {
         </TouchableOpacity>
       </View>
 
-      {/* TABS */}
       {activeNav === "home" && (
         <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.tabsContainer}>
           {["All", "Indoor", "Outdoor", "Succulents", "Flowering", "Herbs", "AirPurifiers"].map(
@@ -236,7 +213,6 @@ export default function HomeScreen({ navigation }) {
         </ScrollView>
       )}
 
-      {/* HOME LIST */}
       {activeNav === "home" && (
         <FlatList
           data={filteredPlants}
@@ -254,7 +230,6 @@ export default function HomeScreen({ navigation }) {
         />
       )}
 
-      {/* FAVOURITES */}
       {activeNav === "heart" && (
         <FlatList
           data={favorites}
@@ -265,7 +240,6 @@ export default function HomeScreen({ navigation }) {
         />
       )}
 
-      {/* CART */}
       {activeNav === "cart" && (
         <FlatList
           data={cart}
@@ -278,14 +252,12 @@ export default function HomeScreen({ navigation }) {
         />
       )}
 
-      {/* PROFILE */}
       {activeNav === "person" && (
         <View style={styles.screenCenter}>
           <Text style={styles.screenTitle}>👤 Profile</Text>
         </View>
       )}
 
-      {/* BOTTOM NAV */}
       <View style={styles.bottomArea}>
         <View style={styles.navContainer}>
           {[
@@ -311,11 +283,6 @@ export default function HomeScreen({ navigation }) {
     </View>
   );
 }
-
-
-/* ---------------------------------------------------
-              SAME ORIGINAL STYLES
---------------------------------------------------- */
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: "#F0F5EC", paddingTop: 30, padding: 10 },
