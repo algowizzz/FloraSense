@@ -11,6 +11,8 @@ import {
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Ionicons } from "@expo/vector-icons";
 import { plants } from "../../data/plant";
+import BottomNav from "../components/BottomNav";
+import { useIsFocused } from "@react-navigation/native";
 
 const PlantCard = React.memo(({ item, isFav, toggleFavorite, navigation }) => (
   <View style={styles.card}>
@@ -45,39 +47,36 @@ const PlantCard = React.memo(({ item, isFav, toggleFavorite, navigation }) => (
 
 export default function HomeScreen({ navigation }) {
   const [activeTab, setActiveTab] = useState("All");
-  const [activeNav, setActiveNav] = useState("home");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-
   const [favorites, setFavorites] = useState([]);
-  const [cart, setCart] = useState([]);
+  const isFocused = useIsFocused();
 
   useEffect(() => {
-    loadData();
-  }, []);
+    if (isFocused) loadData();
+  }, [isFocused]);
 
   const loadData = async () => {
     const fav = await AsyncStorage.getItem("favorites");
-    const crt = await AsyncStorage.getItem("cart");
-
     if (fav) setFavorites(JSON.parse(fav));
-    if (crt) setCart(JSON.parse(crt));
   };
 
-  const toggleFavorite = useCallback(
-    async (plant) => {
-      let updatedFavs;
+  const toggleFavorite = async (plant) => {
+    try {
+      const favData = await AsyncStorage.getItem("favorites");
+      let favList = favData ? JSON.parse(favData) : [];
 
-      if (favorites.some((f) => f.id === plant.id)) {
-        updatedFavs = favorites.filter((f) => f.id !== plant.id);
+      if (favList.some((f) => f.id === plant.id)) {
+        favList = favList.filter((f) => f.id !== plant.id);
       } else {
-        updatedFavs = [...favorites, plant];
+        favList.push(plant);
       }
 
-      setFavorites(updatedFavs);
-      await AsyncStorage.setItem("favorites", JSON.stringify(updatedFavs));
-    },
-    [favorites]
-  );
+      await AsyncStorage.setItem("favorites", JSON.stringify(favList));
+      setFavorites(favList);
+    } catch (e) {
+      console.warn("toggleFavorite error", e);
+    }
+  };
 
   const categories = [
     "All",
@@ -122,120 +121,45 @@ export default function HomeScreen({ navigation }) {
       </View>
 
       {/* TABS */}
-      {activeNav === "home" && (
-        <View style={styles.tabsContainer}>
-          <ScrollView
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            contentContainerStyle={{ paddingHorizontal: 15 }}
-          >
-            {categories.map((tab) => (
-              <TouchableOpacity
-                key={tab}
-                style={[styles.tab, activeTab === tab && styles.tabActive]}
-                onPress={() => setActiveTab(tab)}
-              >
-                <Text
-                  style={[
-                    styles.tabText,
-                    activeTab === tab && styles.tabTextActive,
-                  ]}
-                >
-                  {tab}
-                </Text>
-              </TouchableOpacity>
-            ))}
-          </ScrollView>
-        </View>
-      )}
-
-      {/* HOME LIST */}
-      {activeNav === "home" && (
-        <FlatList
-          data={filteredPlants}
-          keyExtractor={(item) => item.id}
-          renderItem={renderPlantCard}
-          showsVerticalScrollIndicator={false}
-          initialNumToRender={8}
-          maxToRenderPerBatch={5}
-          windowSize={5}
-          removeClippedSubviews={true}
-          contentContainerStyle={{ paddingBottom: 80, paddingHorizontal: 20 }}
-        />
-      )}
-
-      {/* ❤️ FAVOURITES */}
-      {activeNav === "heart" && (
-        <View style={styles.screenCenter}>
-          <Text style={styles.screenTitle}>❤️ Favourites</Text>
-
-          {favorites.length === 0 ? (
-            <Text>No favourites yet</Text>
-          ) : (
-            favorites.map((item) => (
-              <Text key={item.id} style={{ marginTop: 10 }}>
-                • {item.name}
-              </Text>
-            ))
-          )}
-        </View>
-      )}
-
-      {/* 🛒 CART */}
-      {activeNav === "cart" && (
-        <View style={styles.screenCenter}>
-          <Text style={styles.screenTitle}>🛒 Cart</Text>
-
-          {cart.length === 0 ? (
-            <Text>No items in cart</Text>
-          ) : (
-            cart.map((item) => (
-              <Text key={item.id} style={{ marginTop: 10 }}>
-                • {item.name}
-              </Text>
-            ))
-          )}
-        </View>
-      )}
-
-      {/* PROFILE */}
-      {activeNav === "person" && isLoggedIn && (
-        <View style={styles.screenCenter}>
-          <Text style={styles.screenTitle}>👤 Profile</Text>
-        </View>
-      )}
-
-      {/* NAVIGATION BAR */}
-      <View style={styles.bottomArea}>
-        <View style={styles.navContainer}>
-          {[
-            { key: "home", icon: "home" },
-            { key: "heart", icon: "heart" },
-            { key: "cart", icon: "cart" },
-            { key: "person", icon: "person" },
-          ].map((nav) => (
+      <View style={styles.tabsContainer}>
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={{ paddingHorizontal: 15 }}
+        >
+          {categories.map((tab) => (
             <TouchableOpacity
-              key={nav.key}
-              style={[styles.navItem, activeNav === nav.key && styles.activeNavItem]}
-              onPress={() => {
-                if (nav.key === "person") {
-                  isLoggedIn
-                    ? navigation.navigate("Account")
-                    : navigation.navigate("Login");
-                } else {
-                  setActiveNav(nav.key);
-                }
-              }}
+              key={tab}
+              style={[styles.tab, activeTab === tab && styles.tabActive]}
+              onPress={() => setActiveTab(tab)}
             >
-              <Ionicons
-                name={nav.icon}
-                size={24}
-                color={activeNav === nav.key ? "#1B4332" : "#DDE5D8"}
-              />
+              <Text
+                style={[
+                  styles.tabText,
+                  activeTab === tab && styles.tabTextActive,
+                ]}
+              >
+                {tab}
+              </Text>
             </TouchableOpacity>
           ))}
-        </View>
+        </ScrollView>
       </View>
+
+      {/* PLANTS LIST */}
+      <FlatList
+        data={filteredPlants}
+        keyExtractor={(item) => item.id.toString()}
+        renderItem={renderPlantCard}
+        showsVerticalScrollIndicator={false}
+        initialNumToRender={8}
+        maxToRenderPerBatch={5}
+        windowSize={5}
+        removeClippedSubviews={true}
+        contentContainerStyle={{ paddingBottom: 80, paddingHorizontal: 20 }}
+      />
+
+      <BottomNav activeNav="home" navigation={navigation} isLoggedIn={isLoggedIn} />
     </View>
   );
 }

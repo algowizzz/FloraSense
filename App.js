@@ -1,6 +1,7 @@
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import Toast from "react-native-toast-message";
 import WelcomeScreen from './frontend/screens/WelcomeScreen';
 import LoginScreen from './frontend/screens/LoginScreen';
 import SignupScreen from './frontend/screens/SignupScreen';
@@ -8,6 +9,8 @@ import HomeScreen from './frontend/screens/HomeScreen';
 import ForgotPasswordScreen from "./frontend/screens/ForgotPassword";
 import AccountScreen from "./frontend/screens/AccountScreen";
 import DetailsScreen from "./frontend/screens/DetailsScreen";
+import FavouriteScreen from "./frontend/screens/FavouriteScreen";
+import CartScreen from "./frontend/screens/CartScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -43,7 +46,16 @@ export default function App() {
           name="Details"
           component={DetailsScreen}
         />
+        <Stack.Screen
+          name="FavouriteScreen"
+          component={FavouriteScreen}
+        />
+        <Stack.Screen
+          name="CartScreen"
+          component={CartScreen}
+        />
       </Stack.Navigator>
+      <Toast />
     </NavigationContainer>
   );
 }
