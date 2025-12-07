@@ -11,6 +11,12 @@ import AccountScreen from "./frontend/screens/AccountScreen";
 import DetailsScreen from "./frontend/screens/DetailsScreen";
 import FavouriteScreen from "./frontend/screens/FavouriteScreen";
 import CartScreen from "./frontend/screens/CartScreen";
+import MyOrdersScreen from "./frontend/screens/MyOrdersScreen";
+import OrderDetailsScreen from "./frontend/screens/OrderDetailsScreen";
+import EditProfileScreen from "./frontend/screens/EditProfileScreen";
+import SettingsScreen from "./frontend/screens/SettingsScreen";
+import HelpContactScreen from "./frontend/screens/HelpContactScreen";
+import CheckoutScreen from "./frontend/screens/CheckoutScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -53,6 +59,30 @@ export default function App() {
         <Stack.Screen
           name="CartScreen"
           component={CartScreen}
+        />
+        <Stack.Screen
+          name="MyOrdersScreen"
+          component={MyOrdersScreen}
+        />
+        <Stack.Screen
+          name="OrderDetailsScreen"
+          component={OrderDetailsScreen}
+        />
+        <Stack.Screen
+          name="EditProfileScreen"
+          component={EditProfileScreen}
+        />
+        <Stack.Screen
+          name="SettingsScreen"
+          component={SettingsScreen}
+        />
+        <Stack.Screen
+          name="HelpContactScreen"
+          component={HelpContactScreen}
+        />
+        <Stack.Screen
+          name="CheckoutScreen"
+          component={CheckoutScreen}
         />
       </Stack.Navigator>
       <Toast />

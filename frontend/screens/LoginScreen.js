@@ -9,6 +9,8 @@ import {
   Alert,
 } from "react-native";
 import { Ionicons, AntDesign } from "@expo/vector-icons";
+import { loginUser } from "../utils/auth";
+import BottomNav from "../components/BottomNav";
 
 export default function LoginScreen({ navigation }) {
   const [rememberMe, setRememberMe] = useState(false);
@@ -16,9 +18,14 @@ export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
     if (!email.trim() || !password.trim()) {
       Alert.alert("Error", "Please enter both email and password.");
+      return;
+    }
+    const res = await loginUser(email, password);
+    if (!res.success) {
+      Alert.alert("Error", res.message);
       return;
     }
     navigation.replace("Account");
@@ -26,16 +33,9 @@ export default function LoginScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity
-        style={styles.backBtn}
-        onPress={() => navigation.navigate("Home")}
-      >
-        <Ionicons name="arrow-back" size={20} color="black" />
-      </TouchableOpacity>
-
       <Text style={styles.title}>Login</Text>
       <Text style={styles.subtitle}>
-        It’s time to return to the soil! Log in to your account and keep growing. 🌱
+        It’s time to return to the soil! Log in and keep growing. 🌱
       </Text>
 
       <View style={styles.inputContainer}>
@@ -75,8 +75,8 @@ export default function LoginScreen({ navigation }) {
           <Switch
             value={rememberMe}
             onValueChange={setRememberMe}
-            trackColor={{ false: "#ccc", true: "#6e975b" }}
-            thumbColor={rememberMe ? "#3e6a30" : "#908f8fff"}
+            trackColor={{ false: "#ccc", true: "#1b4332cd" }}
+            thumbColor={rememberMe ? "#1b4332" : "#908f8fff"}
           />
           <Text style={styles.rememberText}> Remember Me</Text>
         </View>
@@ -94,12 +94,12 @@ export default function LoginScreen({ navigation }) {
 
       <View style={styles.socialContainer}>
         <TouchableOpacity style={styles.socialBtn}>
-          <AntDesign name="google" size={20} color="#3e6a30" />
+          <AntDesign name="google" size={20} color="#1b4332" />
           <Text style={styles.socialText}> Google</Text>
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.socialBtn}>
-          <AntDesign name="apple" size={20} color="#3e6a30" />
+          <AntDesign name="apple" size={20} color="#1b4332" />
           <Text style={styles.socialText}> Apple</Text>
         </TouchableOpacity>
       </View>
@@ -110,38 +110,33 @@ export default function LoginScreen({ navigation }) {
           Sign Up
         </Text>
       </Text>
+
+      <BottomNav activeNav="person" navigation={navigation} isLoggedIn={false} />
     </View>
   );
 }
 
-
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#e8eddf",
+    backgroundColor: "#f0f5ec",
     alignItems: "center",
     justifyContent: "center",
     padding: 40,
-  },
-
-  backBtn: {
-    position: "absolute",
-    top: 50, 
-    left: 20,
-    zIndex: 10,
+    paddingBottom: 140, 
+    paddingTop: 100,
   },
 
   title: {
     fontSize: 30,
-    fontFamily: 'AvenirNext-Bold',
+    fontFamily: "AvenirNext-Bold",
     fontWeight: "bold",
-    color: "#3e6a30",
+    color: "#1b4332",
     marginBottom: 20,
   },
 
   subtitle: {
-    fontFamily: 'AvenirNext-Regular',
+    fontFamily: "AvenirNext-Regular",
     fontSize: 15,
     color: "#84887b",
     textAlign: "center",
@@ -151,7 +146,7 @@ const styles = StyleSheet.create({
 
   inputContainer: {
     width: "100%",
-    backgroundColor: "#dde2d3",
+    backgroundColor: "#ddeedc",
     borderRadius: 25,
     paddingHorizontal: 10,
     paddingVertical: 8,
@@ -163,14 +158,14 @@ const styles = StyleSheet.create({
   input: {
     flex: 1,
     fontSize: 15,
-    fontFamily: 'AvenirNext-Regular',
+    fontFamily: "AvenirNext-Regular",
   },
 
   iconWrapper: {
     width: 30,
     height: 30,
     borderRadius: 50,
-    backgroundColor: "#faffec",
+    backgroundColor: "#f0f5ec",
     justifyContent: "center",
     alignItems: "center",
     shadowColor: "#000",
@@ -191,19 +186,19 @@ const styles = StyleSheet.create({
   rememberText: {
     fontSize: 13,
     color: "#444",
-    fontFamily: 'AvenirNext-Regular',
+    fontFamily: "AvenirNext-Regular",
   },
 
   forgotPasswordLink: {
-    fontFamily: 'AvenirNext-Regular',
+    fontFamily: "AvenirNext-Regular",
     fontSize: 13,
-    color: "#3e6a30",
+    color: "#1b4332",
   },
 
   loginBtn: {
     marginTop: 15,
     width: "100%",
-    backgroundColor: "#3e6a30",
+    backgroundColor: "#1b4332",
     paddingVertical: 10,
     borderRadius: 30,
     alignItems: "center",
@@ -214,11 +209,11 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontSize: 20,
     fontWeight: "bold",
-    fontFamily: 'AvenirNext-Bold',
+    fontFamily: "AvenirNext-Bold",
   },
 
   divider: {
-    fontFamily: 'AvenirNext-Regular',
+    fontFamily: "AvenirNext-Regular",
     fontSize: 15,
     color: "#444",
     marginBottom: 20,
@@ -229,6 +224,7 @@ const styles = StyleSheet.create({
     width: "100%",
     justifyContent: "space-between",
     marginBottom: 20,
+    marginTop: "auto", 
   },
 
   socialBtn: {
@@ -238,33 +234,30 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     paddingVertical: 12,
     borderRadius: 30,
-    backgroundColor: "#f3f7ec",
+    backgroundColor: "#ddeedc",
     marginHorizontal: 5,
     elevation: 2,
-    shadowColor: "#000",
-    shadowOpacity: 0.1,
-    shadowRadius: 5,
   },
 
   socialText: {
-    fontFamily: 'AvenirNext-Medium',
+    fontFamily: "AvenirNext-Medium",
     fontSize: 18,
     fontWeight: "bold",
     marginLeft: 5,
-    color: '#3e6a30',
+    color: "#1b4332",
   },
 
   footer: {
-    fontFamily: 'AvenirNext-Regular',
+    fontFamily: "AvenirNext-Regular",
     fontSize: 15,
-    marginTop: 10,
-    color: '#1e201b',
+    marginTop: 5,
+    color: "#1e201b",
   },
 
   link: {
-    fontFamily: 'AvenirNext-Medium',
+    fontFamily: "AvenirNext-Medium",
     fontSize: 15,
-    color: "#3e6a30",
+    color: "#1b4332",
     fontWeight: "500",
   },
 });

@@ -20,7 +20,7 @@ const PlantCard = React.memo(({ item, isFav, toggleFavorite, navigation }) => (
       style={styles.heartBtn}
       onPress={() => toggleFavorite(item)}
     >
-      <Ionicons name={isFav ? "heart" : "heart-outline"} size={20} color="white" />
+      <Ionicons name={isFav ? "heart" : "heart-outline"} size={20} color="#f0f5ec" />
     </TouchableOpacity>
 
     <Image
@@ -39,7 +39,7 @@ const PlantCard = React.memo(({ item, isFav, toggleFavorite, navigation }) => (
         style={styles.arrowBtn}
         onPress={() => navigation.navigate("Details", { plant: item })}
       >
-        <Ionicons name="arrow-forward" size={20} color="white" />
+        <Ionicons name="arrow-forward" size={20} color="#f0f5ec" />
       </TouchableOpacity>
     </View>
   </View>
@@ -108,7 +108,6 @@ export default function HomeScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
-      {/* HEADER */}
       <View style={styles.header}>
         <Text style={styles.title}>
           Find Your{"\n"}
@@ -120,7 +119,6 @@ export default function HomeScreen({ navigation }) {
         </TouchableOpacity>
       </View>
 
-      {/* TABS */}
       <View style={styles.tabsContainer}>
         <ScrollView
           horizontal
@@ -146,7 +144,6 @@ export default function HomeScreen({ navigation }) {
         </ScrollView>
       </View>
 
-      {/* PLANTS LIST */}
       <FlatList
         data={filteredPlants}
         keyExtractor={(item) => item.id.toString()}
@@ -165,7 +162,12 @@ export default function HomeScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: "#F0F5EC", paddingTop: 30, padding: 10 },
+  container: { 
+    flex: 1, 
+    backgroundColor: "#F0F5EC", 
+    paddingTop: 30, 
+    padding: 10 
+  },
 
   header: {
     flexDirection: "row",
@@ -197,7 +199,7 @@ const styles = StyleSheet.create({
   },
 
   tab: {
-    backgroundColor: "#E6E6E6",
+    backgroundColor: "#DDEEDC",
     paddingHorizontal: 20,
     paddingVertical: 10,
     borderRadius: 50,

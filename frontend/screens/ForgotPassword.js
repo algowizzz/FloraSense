@@ -14,12 +14,12 @@ export default function ForgotPasswordScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity
+      {/* <TouchableOpacity
         style={styles.backBtn}
         onPress={() => navigation.navigate("Login")}
       >
         <Ionicons name="arrow-back" size={28} color="black" />
-      </TouchableOpacity>
+      </TouchableOpacity> */}
 
       <Text style={styles.title}>Forgot Password?</Text>
       <Text style={styles.subtitle}>
@@ -60,24 +60,24 @@ export default function ForgotPasswordScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#e8eddf",
+    backgroundColor: "#f0f5ec",
     alignItems: "center",
     justifyContent: "center",
     padding: 40,
   },
 
-  backBtn: {
-    position: "absolute",
-    top: 50,
-    left: 20,
-    zIndex: 10,
-  },
+  // backBtn: {
+  //   position: "absolute",
+  //   top: 50,
+  //   left: 20,
+  //   zIndex: 10,
+  // },
 
   title: {
     fontSize: 30,
     fontFamily: "AvenirNext-Bold",
     fontWeight: "bold",
-    color: "#3e6a30",
+    color: "#1b4332",
     marginBottom: 20,
   },
 
@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
 
   inputContainer: {
     width: "100%",
-    backgroundColor: "#dde2d3",
+    backgroundColor: "#ddeedc",
     borderRadius: 25,
     paddingHorizontal: 15,
     paddingVertical: 12,
@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 50,
-    backgroundColor: "#faffec",
+    backgroundColor: "#f0f5ec",
     justifyContent: "center",
     alignItems: "center",
     shadowColor: "#000",
@@ -124,7 +124,7 @@ const styles = StyleSheet.create({
   resetBtn: {
     marginTop: 20,
     width: "100%",
-    backgroundColor: "#3e6a30",
+    backgroundColor: "#1b4332",
     paddingVertical: 5,
     borderRadius: 30,
     alignItems: "center",
@@ -147,7 +147,8 @@ const styles = StyleSheet.create({
   link: {
     fontFamily: "AvenirNext-Medium",
     fontSize: 14,
-    color: "#3e6a30",
+    color: "#1b4332",
     fontWeight: "500",
+    textDecorationLine: "underline",
   },
 });

@@ -62,8 +62,6 @@ export default function FavouriteScreen({ navigation }) {
 
   return (
     <View style={{ flex: 1, backgroundColor: "#F0F5EC" }}>
-
-      {/* 💚 Curved Green Header */}
       <View style={styles.greenHeader}>
         <Text style={styles.greenHeaderTitle}>YOUR FAVOURITES</Text>
         <Text style={styles.greenHeaderSubtitle}>
@@ -77,7 +75,6 @@ export default function FavouriteScreen({ navigation }) {
         ) : (
           favourites.map((item) => (
             <View key={item.id} style={styles.card}>
-              {/* 🌱 Image */}
               <Image
                 source={
                   typeof item.image === "string"
@@ -87,7 +84,6 @@ export default function FavouriteScreen({ navigation }) {
                 style={styles.image}
               />
 
-              {/* 🌱 Details */}
               <View style={styles.infoContainer}>
                 <TouchableOpacity onPress={() => navigation.navigate("Details", { plant: item })}>
                   <Text style={styles.plantName}>{item.name}</Text>
@@ -95,10 +91,8 @@ export default function FavouriteScreen({ navigation }) {
 
                 <Text style={styles.price}>{item.price}</Text>
 
-                {/* 🔘 Buttons Row */}
                 <View style={styles.buttonsRow}>
                   
-                  {/* Remove Button */}
                   <TouchableOpacity
                     style={styles.removeBtn}
                     onPress={() => removeFavourite(item.id)}
@@ -106,7 +100,6 @@ export default function FavouriteScreen({ navigation }) {
                     <Ionicons name="trash-outline" size={18} color="white" />
                   </TouchableOpacity>
 
-                  {/* Add to Cart */}
                   <TouchableOpacity
                     style={styles.addBtn}
                     onPress={() => addToCart(item)}
@@ -128,26 +121,25 @@ export default function FavouriteScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  /* 💚 Header Styling */
   greenHeader: {
     width: "100%",
     backgroundColor: "#1B4332",
-    paddingTop: 70,
-    paddingBottom: 55,
+    paddingTop: 60,
+    paddingBottom: 40,
     borderBottomLeftRadius: 80,
     borderBottomRightRadius: 80,
     alignItems: "center",
   },
 
   greenHeaderTitle: {
-    color: "white",
-    fontSize: 28,
+    color: "#f0f5ec",
+    fontSize: 25,
     fontWeight: "bold",
   },
 
   greenHeaderSubtitle: {
-    color: "white",
-    fontSize: 16,
+    color: "#f0f5ec",
+    fontSize: 15,
     marginTop: 5,
     opacity: 0.9,
   },
@@ -156,13 +148,12 @@ const styles = StyleSheet.create({
     textAlign: "center",
     marginTop: 50,
     fontSize: 18,
-    color: "#6B6B6B",
+    color: "#1b4332",
   },
 
-  /* 💚 Cards Same as Cart */
   card: {
     flexDirection: "row",
-    backgroundColor: "#E8F5E9",
+    backgroundColor: "#ddeedc",
     marginHorizontal: 22,
     marginVertical: 14,
     padding: 16,
@@ -194,7 +185,6 @@ const styles = StyleSheet.create({
     color: "#1B4332",
   },
 
-  /* Buttons Row */
   buttonsRow: {
     flexDirection: "row",
     marginTop: 14,
@@ -202,7 +192,7 @@ const styles = StyleSheet.create({
   },
 
   removeBtn: {
-    backgroundColor: "#8A1C1C",
+    backgroundColor: "#1B4332",
     paddingVertical: 8,
     paddingHorizontal: 12,
     borderRadius: 8,
@@ -214,9 +204,9 @@ const styles = StyleSheet.create({
     marginLeft: 12,
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: "#ffffff",
+    backgroundColor: "#f0f5ec",
     paddingVertical: 8,
-    paddingHorizontal: 14,
+    paddingHorizontal: 7,
     borderRadius: 8,
     borderWidth: 1,
     borderColor: "#1B4332",

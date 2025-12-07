@@ -39,7 +39,7 @@ const DetailsScreen = ({ navigation, route }) => {
         duration: 300,
         useNativeDriver: true,
       }).start();
-    }, 10000); // 10 seconds
+    }, 5000); 
   };
 
   const checkFavouriteStatus = async () => {
@@ -86,7 +86,6 @@ const DetailsScreen = ({ navigation, route }) => {
 
   return (
     <View style={{ flex: 1 }}>
-      {/* Custom Toast */}
       <Animated.View
         style={[
           styles.toastContainer,
@@ -167,12 +166,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     borderRadius: 12,
     position: "absolute",
-    top: 60, // EXACTLY as you requested
+    top: 60, 
     alignSelf: "center",
     zIndex: 999,
   },
   toastText: {
-    color: "#FFFFFF",
+    color: "#f0f5ec",
     fontSize: 14,
     fontWeight: "600",
   },
@@ -216,7 +215,7 @@ const styles = StyleSheet.create({
   headerText: {
     fontSize: 20,
     fontWeight: "600",
-    color: "#2f4f2f",
+    color: "#1B4332",
   },
 
   imageContainer: {
@@ -241,23 +240,23 @@ const styles = StyleSheet.create({
   plantName: {
     fontSize: 22,
     fontWeight: "700",
-    color: "#234d20",
+    color: "#1B4332",
   },
 
   price: {
     fontSize: 22,
     fontWeight: "700",
-    color: "#234d20",
+    color: "#1B4332",
   },
 
   rating: {
     marginTop: 5,
-    color: "#3d5c3d",
+    color: "#1B4332",
   },
 
   description: {
     marginTop: 10,
-    color: "#2f4f2f",
+    color: "#1B4332",
     lineHeight: 20,
   },
 
@@ -284,7 +283,7 @@ const styles = StyleSheet.create({
   },
 
   infoLabel: {
-    color: "#3b5e3b",
+    color: "#1B4332",
   },
 
   infoValue: {
@@ -292,7 +291,7 @@ const styles = StyleSheet.create({
   },
 
   cartButton: {
-    backgroundColor: "#234d20",
+    backgroundColor: "#1B4332",
     marginTop: 30,
     marginBottom: 60,
     borderRadius: 25,
@@ -301,7 +300,7 @@ const styles = StyleSheet.create({
   },
 
   cartText: {
-    color: "white",
+    color: "#f0f5ec",
     fontSize: 16,
   },
 });

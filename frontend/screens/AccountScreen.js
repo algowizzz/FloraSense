@@ -1,135 +1,200 @@
-import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
+import React, { useEffect, useState } from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  ScrollView,
+} from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import BottomNav from "../components/BottomNav";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function AccountScreen({ navigation }) {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    loadUser();
+  }, []);
+
+  const loadUser = async () => {
+    const data = await AsyncStorage.getItem("currentUser");
+    if (data) setUser(JSON.parse(data));
+  };
+
+  const logout = async () => {
+    await AsyncStorage.removeItem("currentUser");
+    navigation.replace("Login");
+  };
+
   return (
-    <View style={styles.container}>
-      <View style={styles.profileWrapper}>
-        <Image
-          source={{ uri: "https://cdn-icons-png.flaticon.com/512/149/149071.png" }}
-          style={styles.profileImage}
-        />
-      </View>
+    <View style={{ flex: 1, backgroundColor: "#F0F5EC" }}>
+      <ScrollView contentContainerStyle={{ paddingBottom: 140 }}>
+        <View style={styles.header}>
+          <Text style={styles.title}>Account</Text>
+          <Text style={styles.subtitle}>Manage your profile & settings 🌿</Text>
+        </View>
+        <View style={styles.profileCard}>
+          <View style={styles.avatar}>
+            <Ionicons name="person" size={40} color="#1B4332" />
+          </View>
 
-      <Text style={styles.title}>Hello</Text>
-      <Text style={styles.subtitle}>hello@example.com</Text>
+          <View>
+            <Text style={styles.profileName}>
+              {user?.name || "Guest User"}
+            </Text>
+            <Text style={styles.profileEmail}>
+              {user?.email || "No email available"}
+            </Text>
+          </View>
+        </View>
+        <View style={styles.menuSection}>
+          <TouchableOpacity
+            style={styles.menuItem}
+            onPress={() => navigation.navigate("EditProfileScreen")}
+          >
+            <Text style={styles.menuText}>Edit Profile</Text>
+            <Ionicons name="chevron-forward" size={20} color="#1B4332" />
+          </TouchableOpacity>
 
-      <View style={styles.optionContainer}>
-        <TouchableOpacity style={styles.optionRow}>
-          <Ionicons name="cart-outline" size={24} color="#2d6a4f" />
-          <Text style={styles.optionText}>My Orders</Text>
+          <TouchableOpacity
+            style={styles.menuItem}
+            onPress={() => navigation.navigate("MyOrdersScreen")}
+          >
+            <Text style={styles.menuText}>My Orders</Text>
+            <Ionicons name="chevron-forward" size={20} color="#1B4332" />
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={styles.menuItem}
+            onPress={() => navigation.navigate("SettingsScreen")}
+          >
+            <Text style={styles.menuText}>Settings</Text>
+            <Ionicons name="chevron-forward" size={20} color="#1B4332" />
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={styles.menuItem}
+            onPress={() => navigation.navigate("HelpContactScreen")}
+          >
+            <Text style={styles.menuText}>Help & Contact</Text>
+            <Ionicons name="chevron-forward" size={20} color="#1B4332" />
+          </TouchableOpacity>
+        </View>
+
+        <TouchableOpacity style={styles.logoutBtn} onPress={logout}>
+          <Ionicons name="log-out-outline" size={20} color="#fff" />
+          <Text style={styles.logoutText}>Logout</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.optionRow}>
-          <Ionicons name="heart-outline" size={24} color="#2d6a4f" />
-          <Text style={styles.optionText}>Favorites</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.optionRow}>
-          <Ionicons name="settings-outline" size={24} color="#2d6a4f" />
-          <Text style={styles.optionText}>Settings</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.optionRow}>
-          <Ionicons name="help-circle-outline" size={24} color="#2d6a4f" />
-          <Text style={styles.optionText}>Help & Support</Text>
-        </TouchableOpacity>
-      </View>
-
-      <TouchableOpacity
-        style={styles.logoutBtn}
-        onPress={() => navigation.replace("Login")}
-      >
-        <Text style={styles.logoutText}>Log Out</Text>
-      </TouchableOpacity>
-
+      </ScrollView>
       <BottomNav activeNav="person" navigation={navigation} isLoggedIn={true} />
     </View>
   );
 }
 
+
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#eef2e6",
+  header: {
+    width: "100%",
+    backgroundColor: "#1B4332",
+    paddingTop: 60,
+    paddingBottom: 40,
+    borderBottomLeftRadius: 80,
+    borderBottomRightRadius: 80,
     alignItems: "center",
-    padding: 30,
-  },
-
-  profileWrapper: {
-    width: 120,
-    height: 120,
-    borderRadius: 60,
-    backgroundColor: "#fff",
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: 60,
-    marginBottom: 20,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 4,
-  },
-
-  profileImage: {
-    width: 100,
-    height: 100,
-    borderRadius: 50,
   },
 
   title: {
-    fontSize: 28,
-    fontFamily: "AvenirNext-Bold",
+    color: "#f0f5ec",
+    fontSize: 25,
     fontWeight: "bold",
-    color: "#2d4a22",
-    marginTop: 10,
   },
-
+  
   subtitle: {
-    fontFamily: "AvenirNext-Medium",
-    fontSize: 16,
-    color: "#555",
-    marginBottom: 30,
+    color: "#f0f5ec",
+    fontSize: 15,
+    marginTop: 5,
+    opacity: 0.9,
   },
 
-  optionContainer: {
-    width: "100%",
-    backgroundColor: "#e3e8da",
+  profileCard: {
+    backgroundColor: "#ddeedc",
+    marginHorizontal: 20,
     borderRadius: 20,
-    padding: 15,
-    marginBottom: 30,
-  },
-
-  optionRow: {
+    padding: 20,
     flexDirection: "row",
     alignItems: "center",
-    paddingVertical: 15,
-    borderBottomColor: "#ccc",
-    borderBottomWidth: 0.5,
+    marginTop: 25,
+    marginBottom: 25,
   },
 
-  optionText: {
+  avatar: {
+    width: 60,
+    height: 60,
+    backgroundColor: "#f0f5ec",
+    borderRadius: 30,
+    justifyContent: "center",
+    alignItems: "center",
+    marginRight: 20,
+  },
+
+  profileName: {
+    fontSize: 20,
+    fontWeight: "700",
+    color: "#1b4332",
+  },
+
+  profileEmail: {
+    fontSize: 14,
+    color: "#1b4332ea",
+    marginTop: 3,
+  },
+
+  sectionTitle: {
     fontSize: 16,
-    fontFamily: "AvenirNext-Medium",
-    marginLeft: 15,
-    color: "#2d4a22",
+    fontWeight: "700",
+    color: "#1b4332",
+    marginBottom: 10,
+    marginLeft: 5,
+  },
+
+  menuSection: {
+    backgroundColor: "#ddeedc",
+    marginHorizontal: 20,
+    borderRadius: 16,
+    padding: 18,
+    marginBottom: 20,
+  },
+
+  menuItem: {
+    paddingVertical: 12,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+
+  menuText: {
+    fontSize: 16,
+    color: "#1B4332",
+    fontWeight: "500",
   },
 
   logoutBtn: {
-    width: "100%",
-    backgroundColor: "#2d6a4f",
-    paddingVertical: 14,
-    borderRadius: 30,
+    flexDirection: "row",
     alignItems: "center",
+    backgroundColor: "#1B4332",
+    marginHorizontal: 20,
+    paddingVertical: 14,
+    borderRadius: 12,
+    justifyContent: "center",
+    marginBottom: 40,
   },
 
   logoutText: {
-    fontFamily: "AvenirNext-Bold",
-    color: "#fff",
-    fontSize: 18,
-    fontWeight: "bold",
+    color: "#f0f5ec",
+    fontSize: 16,
+    fontWeight: "600",
+    marginLeft: 8,
   },
 });

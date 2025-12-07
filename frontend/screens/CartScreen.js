@@ -70,8 +70,6 @@ export default function CartScreen({ navigation }) {
 
   return (
     <View style={{ flex: 1, backgroundColor: "#F0F5EC" }}>
-      
-      {/* 💚 CURVED GREEN HEADER */}
       <View style={styles.greenHeader}>
         <Text style={styles.greenHeaderTitle}>YOUR CART</Text>
         <Text style={styles.greenHeaderSubtitle}>
@@ -89,7 +87,6 @@ export default function CartScreen({ navigation }) {
 
             return (
               <View key={item.id} style={styles.card}>
-                {/* 🌿 Product Image */}
                 <Image
                   source={
                     typeof item.image === "string"
@@ -99,14 +96,12 @@ export default function CartScreen({ navigation }) {
                   style={styles.image}
                 />
 
-                {/* 📦 Product Details */}
                 <View style={styles.details}>
                   <Text style={styles.plantName}>{item.name}</Text>
                   <Text style={styles.price}>₹{cleanPrice}</Text>
 
                   <Text style={styles.lineTotal}>Line Total: ₹{lineTotal}</Text>
 
-                  {/* ➕➖ Quantity Box */}
                   <View style={styles.qtyContainer}>
                     <TouchableOpacity
                       style={styles.qtyButton}
@@ -125,7 +120,6 @@ export default function CartScreen({ navigation }) {
                     </TouchableOpacity>
                   </View>
 
-                  {/* ❌ Remove */}
                   <TouchableOpacity
                     style={styles.removeButton}
                     onPress={() => removeItem(item.id)}
@@ -139,7 +133,6 @@ export default function CartScreen({ navigation }) {
         )}
       </ScrollView>
 
-      {/* 🧮 TOTAL + CHECKOUT */}
       {cartItems.length > 0 && (
         <View style={styles.totalBar}>
           <View>
@@ -147,42 +140,44 @@ export default function CartScreen({ navigation }) {
             <Text style={styles.totalValue}>₹{getTotal().toFixed(2)}</Text>
           </View>
 
-          <TouchableOpacity style={styles.checkoutBtn}>
+          <TouchableOpacity
+            style={styles.checkoutBtn}
+            onPress={() => navigation.navigate("CheckoutScreen")}
+          >
             <Text style={styles.checkoutText}>Checkout</Text>
           </TouchableOpacity>
         </View>
       )}
 
-      {/* 🧭 Bottom Navigation */}
       <BottomNav activeNav="cart" navigation={navigation} isLoggedIn={true} />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  /* 💚 CURVED TOP HEADER */
   greenHeader: {
     width: "100%",
     backgroundColor: "#1B4332",
-    paddingTop: 65,
-    paddingBottom: 55,
+    paddingTop: 60,
+    paddingBottom: 40,
     borderBottomLeftRadius: 80,
     borderBottomRightRadius: 80,
     alignItems: "center",
   },
+
   greenHeaderTitle: {
-    color: "white",
-    fontSize: 28,
+    color: "#f0f5ec",
+    fontSize: 25,
     fontWeight: "bold",
   },
+  
   greenHeaderSubtitle: {
-    color: "white",
-    fontSize: 16,
+    color: "#f0f5ec",
+    fontSize: 15,
     marginTop: 5,
     opacity: 0.9,
   },
 
-  /* EMPTY */
   emptyText: {
     textAlign: "center",
     marginTop: 50,
@@ -190,10 +185,9 @@ const styles = StyleSheet.create({
     color: "#6B6B6B",
   },
 
-  /* PRODUCT CARD */
   card: {
     flexDirection: "row",
-    backgroundColor: "#E8F5E9",
+    backgroundColor: "#ddeedc",
     marginHorizontal: 22,
     marginVertical: 14,
     padding: 16,
@@ -227,11 +221,10 @@ const styles = StyleSheet.create({
 
   lineTotal: {
     fontSize: 15,
-    color: "#4F6F52",
+    color: "#1B4332",
     marginTop: 5,
   },
 
-  /* QUANTITY BOX */
   qtyContainer: {
     flexDirection: "row",
     backgroundColor: "#1B4332",
@@ -252,13 +245,13 @@ const styles = StyleSheet.create({
   },
 
   qtySymbol: {
-    color: "white",
+    color: "#f0f5ec",
     fontSize: 20,
     fontWeight: "bold",
   },
 
   qtyText: {
-    color: "white",
+    color: "#f0f5ec",
     fontSize: 18,
     fontWeight: "700",
     width: 30,
@@ -270,7 +263,7 @@ const styles = StyleSheet.create({
   },
 
   removeText: {
-    color: "red",
+    color: "#1b4332",
     fontWeight: "600",
   },
 
@@ -306,7 +299,7 @@ const styles = StyleSheet.create({
   },
 
   checkoutText: {
-    color: "white",
+    color: "#f0f5ec",
     fontSize: 17,
     fontWeight: "bold",
   },

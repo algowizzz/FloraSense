@@ -8,16 +8,17 @@ import {
   Alert,
 } from "react-native";
 import { Ionicons, AntDesign } from "@expo/vector-icons";
+import { registerUser } from "../utils/auth";
 
 export default function SignupScreen({ navigation }) {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [name, setName]           = useState("");
+  const [email, setEmail]         = useState("");
+  const [password, setPassword]   = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-  const handleSignup = () => {
+  const handleSignup = async () => {
     if (!name || !email || !password || !confirmPassword) {
       Alert.alert("Error", "All fields are required!");
       return;
@@ -26,7 +27,12 @@ export default function SignupScreen({ navigation }) {
       Alert.alert("Error", "Passwords do not match!");
       return;
     }
-    navigation.navigate("Account");
+    const res = await registerUser(name, email, password);
+    if (!res.success) {
+      Alert.alert("Error", res.message);
+      return;
+    }
+    navigation.replace("Account");
   };
 
   return (
@@ -44,7 +50,7 @@ export default function SignupScreen({ navigation }) {
           onChangeText={setName}
         />
         <View style={styles.iconWrapper}>
-          <Ionicons name="person-outline" size={20} color="#20340a" style={styles.icon} />
+          <Ionicons name="person-outline" size={20} color="#20340a" />
         </View>
       </View>
 
@@ -56,7 +62,7 @@ export default function SignupScreen({ navigation }) {
           onChangeText={setEmail}
         />
         <View style={styles.iconWrapper}>
-          <Ionicons name="mail-outline" size={20} color="#20340a" style={styles.icon} />
+          <Ionicons name="mail-outline" size={20} color="#20340a" />
         </View>
       </View>
 
@@ -68,17 +74,14 @@ export default function SignupScreen({ navigation }) {
           value={password}
           onChangeText={setPassword}
         />
-        <TouchableOpacity
-          style={styles.icon}
-          onPress={() => setShowPassword(!showPassword)}
-        >
-        <View style={styles.iconWrapper}>
-          <Ionicons
-            name={showPassword ? "eye-off-outline" : "eye-outline"}
-            size={20}
-            color="#20340a"
-          />
-        </View>
+        <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
+          <View style={styles.iconWrapper}>
+            <Ionicons
+              name={showPassword ? "eye-off-outline" : "eye-outline"}
+              size={20}
+              color="#20340a"
+            />
+          </View>
         </TouchableOpacity>
       </View>
 
@@ -91,42 +94,39 @@ export default function SignupScreen({ navigation }) {
           onChangeText={setConfirmPassword}
         />
         <TouchableOpacity
-          style={styles.icon}
           onPress={() => setShowConfirmPassword(!showConfirmPassword)}
         >
-        <View style={styles.iconWrapper}>
-          <Ionicons
-            name={showConfirmPassword ? "eye-off-outline" : "eye-outline"}
-            size={20}
-            color="#20340a"
-          />
-        </View>
+          <View style={styles.iconWrapper}>
+            <Ionicons
+              name={showConfirmPassword ? "eye-off-outline" : "eye-outline"}
+              size={20}
+              color="#20340a"
+            />
+          </View>
         </TouchableOpacity>
       </View>
 
       <TouchableOpacity style={styles.signupBtn} onPress={handleSignup}>
         <Text style={styles.signupText}>Sign Up</Text>
       </TouchableOpacity>
+
       <Text style={styles.divider}>Or</Text>
 
       <View style={styles.socialContainer}>
         <TouchableOpacity style={styles.socialBtn}>
-          <AntDesign name="google" size={20} color="#516B22" />
+          <AntDesign name="google" size={20} color="#1b4332" />
           <Text style={styles.socialText}> Google</Text>
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.socialBtn}>
-          <AntDesign name="apple" size={20} color="#516B22" />
+          <AntDesign name="apple" size={20} color="#1b4332" />
           <Text style={styles.socialText}> Apple</Text>
         </TouchableOpacity>
       </View>
 
       <Text style={styles.footer}>
         Already have an account?{" "}
-        <Text
-          style={styles.link}
-          onPress={() => navigation.navigate("Login")}
-        >
+        <Text style={styles.link} onPress={() => navigation.navigate("Login")}>
           Login
         </Text>
       </Text>
@@ -137,7 +137,7 @@ export default function SignupScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#e8eddf",
+    backgroundColor: "#f0f5ec",
     alignItems: "center",
     justifyContent: "center",
     padding: 40,
@@ -147,7 +147,7 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontFamily: 'AvenirNext-Bold',
     fontWeight: "bold",
-    color: "#3e6a30",
+    color: "#1b4332",
     marginBottom: 10,
   },
 
@@ -162,7 +162,7 @@ const styles = StyleSheet.create({
 
   inputContainer: {
     width: "100%",
-    backgroundColor: "#dde2d3",
+    backgroundColor: "#ddeedc",
     borderRadius: 50,
     paddingHorizontal: 13,
     paddingVertical: 10,
@@ -182,7 +182,7 @@ const styles = StyleSheet.create({
     width: 30,
     height: 30,
     borderRadius: 50,
-    backgroundColor: "#faffec",
+    backgroundColor: "#f0f5ec",
     justifyContent: "center",
     alignItems: "center",
     shadowColor: "#000",
@@ -194,7 +194,7 @@ const styles = StyleSheet.create({
 
   signupBtn: {
     width: "100%",
-    backgroundColor: "#3e6a30",
+    backgroundColor: "#1b4332",
     paddingVertical: 10,
     borderRadius: 30,
     alignItems: "center",
@@ -211,7 +211,7 @@ const styles = StyleSheet.create({
 
   divider: {
     fontSize: 15,
-    color: "#444",
+    color: "#1b4332",
     marginBottom: 15,
   },
 
@@ -229,7 +229,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     paddingVertical: 12,
     borderRadius: 30,
-    backgroundColor: "#f3f7ec",
+    backgroundColor: "#ddeedc",
     marginHorizontal: 5,
     elevation: 2,
     shadowColor: "#000",
@@ -242,7 +242,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
     marginLeft: 5,
-    color: '#3e6a30',
+    color: '#1b4332',
   },
 
   footer: {
@@ -254,7 +254,7 @@ const styles = StyleSheet.create({
   link: {
     fontFamily: 'AvenirNext-Medium',
     fontSize: 15,
-    color: "#3e6a30",
+    color: "#1b4332",
     fontWeight: "500",
   },
 });
